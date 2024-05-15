@@ -31,7 +31,7 @@ module.exports = defineConfig({
     trashAssetsBeforeRuns: true,
     experimentalInteractiveRunEvents: true,
     experimentalMemoryManagement: true,
-    numTestsKeptInMemory: 1,
+    numTestsKeptInMemory: 10,
     video: false,
     setupNodeEvents(on, config) {
       allureWriter(on, config);
