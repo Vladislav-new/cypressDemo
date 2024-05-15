@@ -4,6 +4,5 @@ export default {
     alerts:'[class="card-body"]>h5:contains("Alerts, Frame & Windows")',
     widgets:'[class="card-body"]>h5:contains("Widgets")',
     interactions:'[class="card-body"]>h5:contains("Interactions")',
-    bookStore:'[class="card-body"]>h5:contains("Book Store Application")',
-    columnNames:'[class="element-group"]:has(span:contains("Elements")) ul>li>span'
+    bookStore:'[class="card-body"]>h5:contains("Book Store Application")'
 }
