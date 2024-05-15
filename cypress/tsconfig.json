@@ -12,7 +12,6 @@
             "node",
             "@testing-library/cypress",
             "cypress-real-events",
-            "@types/jsonpath",
             "@shelex/cypress-allure-plugin"
         ]
     },
