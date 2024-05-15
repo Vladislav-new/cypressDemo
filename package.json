@@ -1,0 +1,27 @@
+{
+  "name": "portfolio-cypress",
+  "version": "1.0.0",
+  "description": "There is a presentation of my skills regarding some issues related to JS\\TS and Cypress framework\r - matrix strategy regarding platform and browser with split test-scopes\r - launch CI file in GHActions in another one\r - allure reporting with screenshots\r - different log levels\r - OOP\r - Page object with data factory and bulder\r - custom commands\r - API\r - tags\r - tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vladislav-new/portfolio-Cypress.git"
+  },
+  "author": "Vladislav Shmelev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vladislav-new/portfolio-Cypress/issues"
+  },
+  "homepage": "https://github.com/Vladislav-new/portfolio-Cypress#readme",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.2",
+    "@testing-library/cypress": "^10.0.1",
+    "cypress": "^13.9.0",
+    "cypress-real-events": "^1.12.0",
+    "jsonpath": "^1.1.1",
+    "typescript": "^5.4.5"
+  }
+}
