@@ -1,6 +1,5 @@
-import { forEach } from "cypress/types/lodash";
 import { blockRequests } from "../../helpers/blockList";
-import elementsPageLocators from "../../pageObjects/elementsPage/locators/elementsPageLocators";
+import elementsPageLocators from "../../pageObjects/elementsPage/locators/elementsLocators";
 import mainPageLocators from "../../pageObjects/mainPage/locators/mainPageLocators";
 import { MainPage } from "../../pageObjects/mainPage/mainPage";
 import formsPageLocators from "../../pageObjects/formsPage/locators/formsPageLocators";
@@ -11,7 +10,7 @@ import bookStorePageLocators from "../../pageObjects/bookStoreAppPage/locators/b
 
 const mainPage = new MainPage();
 
-context('Main page opened', () => {
+context('Main page openen and click on cards', () => {
     beforeEach(() => {
         blockRequests();
         cy.visit('', { failOnStatusCode: false })
@@ -20,7 +19,7 @@ context('Main page opened', () => {
         const columnsArray = ["Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"]
         mainPage.clickOn(mainPageLocators.elements)
         cy.url().should('match', /elements/)
-        //find all elements and compare with array of names those elements
+        //find all elements and find containment array of names to those elements
         columnsArray.forEach((item) => {
             cy.get(elementsPageLocators.columnNames)
                 .should('contain.text', item)
@@ -36,7 +35,7 @@ context('Main page opened', () => {
         })
     })
     it('Open Alerts, Frame & Windows page', () => {
-        const columnsArray = ["Browser Windows","Alerts","Frames","Nested Frames","Modal Dialogs"]
+        const columnsArray = ["Browser Windows", "Alerts", "Frames", "Nested Frames", "Modal Dialogs"]
         mainPage.clickOn(mainPageLocators.alerts)
         cy.url().should('match', /alertsWindows/)
         columnsArray.forEach((item) => {
@@ -45,7 +44,7 @@ context('Main page opened', () => {
         })
     })
     it('Open Widgets page', () => {
-        const columnsArray = ["Accordian","Auto Complete","Date Picker","Slider","Progress Bar","Tabs","Tool Tips","Menu","Select Menu"]
+        const columnsArray = ["Accordian", "Auto Complete", "Date Picker", "Slider", "Progress Bar", "Tabs", "Tool Tips", "Menu", "Select Menu"]
         mainPage.clickOn(mainPageLocators.widgets)
         cy.url().should('match', /widgets/)
         columnsArray.forEach((item) => {
@@ -54,7 +53,7 @@ context('Main page opened', () => {
         })
     })
     it('Open Interactions page', () => {
-        const columnsArray = ["Sortable","Selectable","Resizable","Droppable","Dragabble"]
+        const columnsArray = ["Sortable", "Selectable", "Resizable", "Droppable", "Dragabble"]
         mainPage.clickOn(mainPageLocators.interactions)
         cy.url().should('match', /interaction/)
         columnsArray.forEach((item) => {
@@ -63,7 +62,7 @@ context('Main page opened', () => {
         })
     })
     it('Open Book Store Application page', () => {
-        const columnsArray = ["Login","Book Store","Profile","Book Store API"]
+        const columnsArray = ["Login", "Book Store", "Profile", "Book Store API"]
         mainPage.clickOn(mainPageLocators.bookStore)
         cy.url().should('match', /books/)
         columnsArray.forEach((item) => {
