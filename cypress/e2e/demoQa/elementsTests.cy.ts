@@ -1,8 +1,8 @@
 import { blockRequests } from "../../helpers/blockList";
-import { getRandomInt } from "../../helpers/common";
-import { fakeAddress, fakeEmail, fakeFullName } from "../../helpers/fakers";
+import { fakeAddress, fakeDepartment, fakeEmail, fakeFirstName, fakeFullName, fakeLastName, fakeNumber } from "../../helpers/fakers";
 import { CheckBoxPage } from "../../pageObjects/elementsPage/elementsCheckBoxPage";
 import { RadioButton } from "../../pageObjects/elementsPage/elementsRadioButtonPage";
+import { TablePage } from "../../pageObjects/elementsPage/elementsTablePage";
 import { TextBoxPage } from "../../pageObjects/elementsPage/elementsTextBoxPage";
 import elementsLocators from "../../pageObjects/elementsPage/locators/elementsLocators";
 import { MainPage } from "../../pageObjects/mainPage/mainPage";
@@ -11,6 +11,7 @@ const mainPage = new MainPage();
 const textBoxPage = new TextBoxPage();
 const checkBoxPage = new CheckBoxPage();
 const radioButtonPage = new RadioButton();
+const webTable = new TablePage();
 
 context('Elements options tests', () => {
     beforeEach(() => {
@@ -73,22 +74,55 @@ context('Elements options tests', () => {
         radioButtonPage.checkResultUnderButton(elementsLocators.impressiveButton)
     })
 
-    context('Tables', () => {
+    context('Tables', () => { //in progress
+        let params = {
+            firstName: fakeFirstName(),
+            lastName: fakeLastName(),
+            age: fakeNumber(18, 90),
+            email: fakeEmail('test'),
+            department: fakeDepartment(),
+            salary: fakeNumber(100, 90000)
+        }
+
         beforeEach(() => {
             mainPage.openOption('Web Tables');
             cy.url().should('match', /webtables/)
+            cy.log(`Test started: ${Cypress.currentTest.title}`)
+            webTable.createNewRow(params.firstName, params.lastName, params.age, params.email, params.salary, params.department)
         })
 
-        it.only('Create new row', () => {
-            
+        afterEach(()=>{
+            webTable.clickDeleteRowBtn()
+            cy.log(`Test ${Cypress.currentTest.title} completed`)
+        }) 
+
+        it(`Create new row with ${params.firstName}, ${params.lastName}, ${params.age}, ${params.email}, ${params.department}, ${params.salary}`, () => {
+            //проверка, что grid cell не пустой в следующей строке
+            webTable.clickOnAddBtn()
+            cy.findByRole('dialog').should('exist')
+            webTable.typeFirstName(params.firstName)
+            webTable.typeLastName(params.lastName)
+            webTable.typeAge(params.age)
+            webTable.typeSalary(params.salary)
+            webTable.typeDepartment(params.department)
+            webTable.typeEmail(params.email)
+            webTable.clickSubmitBtn()
+            webTable.checkRowIsPresent(params.firstName, params.lastName, params.age, params.email,params.salary,params.department)
+            webTable.clickDeleteRowBtn()
         })
 
         it('Edit row', () => {
-           
+           let newAge= fakeNumber(18, 90)
+           let newFirstName = fakeFirstName()
+           let newSalary = fakeNumber(100, 90000)
+           webTable.editRow(3, newFirstName, newAge, newSalary)
+           webTable.checkEditedFieldShow(3, 0, newFirstName)
+           webTable.checkEditedFieldShow(3, 2, newAge)
+           webTable.checkEditedFieldShow(3, 4, newSalary)
         })
 
-        it('Delete row', () => {
-            
+        it.only('Delete row', () => {
+            //запомнить кол-во строк с данными до удаления и после сравнить их, должно быть на 1 меньше
         })
 
         it('Search row', () => {

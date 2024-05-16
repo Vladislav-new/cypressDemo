@@ -17,9 +17,19 @@ export default {
    checkBoxMaxDepthInTree: 'li:not(:has(ol)) [class="rct-checkbox"]',
    checkBoxResultsView: '[class="text-success"]',
    parentCheckBoxesChecked:'ol [class~="rct-icon-half-check"]',
-   //redio button
+   //radio button
    yesButton: '[id="yesRadio"]',
    impressiveButton: '[id="impressiveRadio"]',
-   noButton: '[id="noRadio"]'
-
+   noButton: '[id="noRadio"]',
+   //webtable
+   addNewRowBtn:'[id="addNewRecordButton"]',
+   firstNameTableFieldInput:'[id="firstName"]',
+   lastNameTableFieldInput:'[id="lastName"]',
+   emailTableFieldInput:'[id="userEmail"]',
+   ageTableFieldInput:'[id="age"]',
+   salaryTableFieldInput:'[id="salary"]',
+   departmentTableFieldInput:'[id="department"]',
+   deleteRecordTableBtn: '[id^="delete-record"]',   
+   filledTableRows:'[class="rt-tr-group"]:has( div>[class="rt-td"]:not(:has(*)))',
+   editTableRowBtn:'[id^="edit-record"]'
 }

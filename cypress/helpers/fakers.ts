@@ -36,6 +36,14 @@ export function fakeFullName() {
     let fakeProjectFullName = fakerRU.person.fullName()
     return fakeProjectFullName
 }
+export function fakeFirstName() {
+    let fakeProjectFullName = fakerRU.person.firstName()
+    return fakeProjectFullName
+}
+export function fakeLastName() {
+    let fakeProjectFullName = fakerRU.person.lastName()
+    return fakeProjectFullName
+}
 export function fakeString(max) {
     let fakerString = fakerRU.lorem.words(100).substring(0, max)
     return fakerString
@@ -44,6 +52,13 @@ export function fakeNumber(min, max) {
     let fakeNumber = faker.number.int({ min, max })
     return fakeNumber
 }
+
+export function fakeDepartment() {
+    let fakeNumber = fakerRU.company.buzzPhrase()
+    let truncatedDepartnemtName = fakeNumber.substring(0, 24);
+    return truncatedDepartnemtName
+}
+
 export function fakeNumeric(max) {
   let fakeNumber = faker.string.numeric({ length: max, allowLeadingZeros: false })
   return fakeNumber
