@@ -1,6 +1,7 @@
 import { result } from "cypress/types/lodash"
 import { getRandomInt } from "../../helpers/common"
 import elementsLocators from "./locators/elementsLocators"
+import { fakeNumber } from "../../helpers/fakers"
 
 export class CheckBoxPage {
     clickOnExpandAll() {
@@ -26,9 +27,10 @@ export class CheckBoxPage {
     selectRandomCheckBoxes(iterations: number) {
         let results = []
         let values = []
+        let previousNumber = -1;
         for (let i = 0; i < iterations; i++) {
             cy.get(elementsLocators.checkBoxMaxDepthInTree).should('be.visible').then($listing => {
-                let randomNumber = getRandomInt(0, $listing.length - 1)
+                let randomNumber = fakeNumber(0, $listing.length - 1)
                 let isChecked = false
                 cy.then(() => {
                     if (!isChecked) {
@@ -38,7 +40,7 @@ export class CheckBoxPage {
                         })
                     } else {
                         // Обновляем предыдущий случайный индекс
-                        randomNumber = getRandomInt(0, $listing.length - 1)
+                        randomNumber = previousNumber
                     }
                 })
                 //проверяем простановку родительских чекбоксов

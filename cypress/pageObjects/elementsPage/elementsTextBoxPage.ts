@@ -1,6 +1,7 @@
 import elementsLocators from "./locators/elementsLocators"
 
 export class TextBoxPage {
+    
     inputDataIn(path, data) {
         cy.get(path).should('be.visible').type(data).then(() => {
             cy.log(`Input "${data}" to field "${path}"`)

@@ -31,5 +31,27 @@ export default {
    departmentTableFieldInput:'[id="department"]',
    deleteRecordTableBtn: '[id^="delete-record"]',   
    filledTableRows:'[class="rt-tr-group"]:has( div>[class="rt-td"]:not(:has(*)))',
-   editTableRowBtn:'[id^="edit-record"]'
+   emptyTableRows: '[class="rt-tr-group"]:has(div[role="gridcell"]>span)',
+   editTableRowBtn:'[id^="edit-record"]',
+   searchBoxInput: '[id="searchBox"]',
+   //butons
+   dblClickBtn: '[id="doubleClickBtn"]',
+   rigthClickBtn: '[id="rightClickBtn"]',
+   clickMessage: '[id$="Message"]',
+   //links
+   homeLink: '[id="simpleLink"]',
+   createdRequest: '[id="created"]',
+   noContentRequest: '[id="no-content"]',
+   movedRequest: '[id="moved"]',
+   badRequest: '[id="bad-request"]',
+   unauthorizedRequest: '[id="unauthorized"]',
+   forbiddenRequest: '[id="forbidden"]',
+   invalidUrlRequest: '[id="invalid-url"]',
+   //download&upload
+   downloadBtn: '[id="downloadButton"]',
+   uploadBtn: '[id="uploadFile"]',
+   //dynamicProps
+   enabledAfter: '[id="enableAfter"]',
+   changeColor: '[id="colorChange"]',
+   visibleAfter: '[id="visibleAfter"]',
 }

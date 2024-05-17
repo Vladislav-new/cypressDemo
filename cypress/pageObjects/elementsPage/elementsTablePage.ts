@@ -1,7 +1,7 @@
 import elementsLocators from "./locators/elementsLocators";
 
 export class TablePage {
-    createNewRow(firstName, lastName, age, email, salary, department){
+    createNewRow(firstName, lastName, age, email, salary, department) {
         this.clickOnAddBtn()
         this.typeFirstName(firstName)
         this.typeLastName(lastName)
@@ -77,12 +77,19 @@ export class TablePage {
     }
 
     checkEditedFieldShow(rowIndex, cellIndex, newValue) {
-        cy.get(elementsLocators.filledTableRows).eq(rowIndex).children().children().eq(cellIndex).invoke('text').then(value=>{
+        cy.get(elementsLocators.filledTableRows).eq(rowIndex).children().children().eq(cellIndex).invoke('text').then(value => {
             expect(value).to.equal(newValue.toString())
         })
     }
 
     searchRow(string) {
-
+        cy.get(elementsLocators.searchBoxInput).should('exist').type(string, { delay: 300 })
+        cy.log(`Searched by "${string}" value`)
+    }
+    checkSearchedValuesInTable(search) {
+        //ищем любое соответствие поисковых данных в ячейках таблицы
+        cy.get(elementsLocators.filledTableRows).children().children().contains(search, { matchCase: false }).invoke('text').then(value => {
+            expect(value.toLowerCase()).to.include(search.toString().toLowerCase())
+        })
     }
 }
