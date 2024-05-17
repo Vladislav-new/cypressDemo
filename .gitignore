@@ -1,3 +1,5 @@
+# Cypress examples
+*.cy.js
 # Logs
 logs
 *.log
