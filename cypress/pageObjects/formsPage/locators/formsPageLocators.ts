@@ -1,3 +1,16 @@
 export default {
     columnNames: '[class="element-group"]:has(span:contains("Forms")) ul>li>span',
+    hobbiesCheckBoxes: '[id^="hobbies-checkbox"]',
+    firstNameInput: '[id="firstName"]',
+    lastNameInput: '[id="lastName"]',
+    genderRadioBtn: '[id^="gender-radio"]',
+    mobileNumber: '[id="userNumber"]',
+    submitBtn:'[id="submit"]',
+    stateDropDown: '[id="state"]',
+    stateOptions: '[class$="option"]',
+    emailInput: '[id="userEmail"]',
+    birthDateInput: '[id="dateOfBirthInput"]',
+    addressInput: '[id="currentAddress"]',
+    hobbiesArea: '[for^="hobbies-checkbox"]',
+    subjectsAreaInput: '[id="subjectsInput"]', 
 }

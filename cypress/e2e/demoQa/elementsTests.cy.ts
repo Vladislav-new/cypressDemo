@@ -22,6 +22,7 @@ const downloadAndUploadPage = new UploadDownloadPage();
 const dynamicPropsPage = new DynamicPropsPage();
 
 context('Elements options tests', () => {
+    
     beforeEach(() => {
         blockRequests();
         cy.visit('/elements', { failOnStatusCode: false })
@@ -31,6 +32,7 @@ context('Elements options tests', () => {
     afterEach(() => {
         cy.log(`Test ${Cypress.currentTest.title} completed`)
     })
+
     it('Text box', () => { 
         //Заполняем строки рандомными данными и проверяем их отображение в текстовом блоке
         const name = fakeFullName();
@@ -100,7 +102,7 @@ context('Elements options tests', () => {
         })
     })
 
-    it('Check box', () => { //flacky
+     it('Check box', () => { //flacky
         /*
             * для множественного проставления чек бокса и проверки нужно сделать итератор и проверку на check
             * затем занести текст каждого выбранного чек бокса в массив и проверять через сравнение массивов - все в методе @selectRandomCheckBoxes(iter)

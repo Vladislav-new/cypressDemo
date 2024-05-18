@@ -5,7 +5,7 @@ import { fakerRU } from '@faker-js/faker';
 // можно комбинировать
 export function fakeEmail(prefix: string) {
     let fakeEmail = faker.internet.email({
-        firstName: prefix+'.a.AT_'+ faker.lorem.word({length:{min:3,max:7}})+faker.number.int({min:1,max:999}),
+        firstName: prefix + '.a.AT_' + faker.lorem.word({ length: { min: 3, max: 7 } }) + faker.number.int({ min: 1, max: 999 }),
         provider: 'yandex.pro'
     })
     return fakeEmail
@@ -14,9 +14,9 @@ export function invalidEmail() {
     let invalidEmail = faker.internet.email({ firstName: ' a autotest', provider: '@yandex.pro' })
     return invalidEmail
 }
-export function randomTwoWords(){
-  let randomWords = fakerRU.lorem.words(2)
-  return randomWords
+export function randomTwoWords() {
+    let randomWords = fakerRU.lorem.words(2)
+    return randomWords
 }
 export function fakeAddress() {
     let fakeAddress = `${fakerRU.location.zipCode()}, ${fakerRU.location.city()}, ${fakerRU.location.street()}, ${fakerRU.location.buildingNumber()}`
@@ -35,6 +35,27 @@ export function fakeNameForEngineering() {
 export function fakeFullName() {
     let fakeProjectFullName = fakerRU.person.fullName()
     return fakeProjectFullName
+}
+
+export function fakeSubject(): string {
+    const subjects = [
+        'Maths',
+        'English',
+        'History',
+        'Physics',
+        'Computer Science',
+        'Biology',
+        'Art',
+        'Accounting',
+    ];
+
+    const randomIndex = Math.floor(Math.random() * subjects.length);
+    return subjects[randomIndex];
+}
+
+export function fakeBirthDate() {
+    let fakeDate = fakerRU.date.birthdate()
+    return fakeDate
 }
 export function fakeFirstName() {
     let fakeProjectFullName = fakerRU.person.firstName()
@@ -60,8 +81,8 @@ export function fakeDepartment() {
 }
 
 export function fakeNumeric(max) {
-  let fakeNumber = faker.string.numeric({ length: max, allowLeadingZeros: false })
-  return fakeNumber
+    let fakeNumber = faker.string.numeric({ length: max, allowLeadingZeros: false })
+    return fakeNumber
 }
 export function fakeSymbol(min, max) {
     const fakeSymbol = faker.string.symbol({ min, max });
