@@ -1,5 +1,7 @@
 # Cypress examples
 *.cy.js
+
+screenshots
 # Logs
 logs
 *.log
