@@ -131,6 +131,7 @@ context('Elements options tests', () => {
         })
         it('Home link click', () => {
             //в cypress нет работы с табами, поэтому удаляем target и просто смотрим редирект
+            // но можно и без удаления target
             linksPage.clickOnHomeLink()
             cy.url().should('eq', Cypress.config().baseUrl)
             cy.go('back')
