@@ -52,12 +52,14 @@ data.forEach((userData) => {
                 formsPage.typeHobbies(userData.hobbies)
                 formsPage.typeSubjects(userData.subjects, 4)
                 formsPage.clickSubmit()
+                //если обязательные поля не пустые то проверяем форму
                 if (userData.firstName !== 'empty' && userData.lastName !== 'empty' && userData.mobile !== 'empty' && userData.gender !== 'empty') {
                     // Список полей для проверки
                     const fieldsToCheck = Object.keys(userData).filter((key) => userData[key] !== 'empty')
                     // Проверяем только заполненные поля из фикстуры
                     for (let i = 1; i < fieldsToCheck.length - 2; i++) { //-2 потому что city и lastName являются составными частями табличных полей
                         const field = fieldsToCheck[i]
+                        // селектор для значений строк в таблице в диалоговом окне
                         cy.get(`tbody > :nth-child(${i}) > :nth-child(2)`).then(($el) => {
                             if ($el.text().trim() !== '') {
                                 //проверка на то что данные в таблице есть, иначе это бы выглядело на индусском для првоерки ТОЛЬКО введенных значений

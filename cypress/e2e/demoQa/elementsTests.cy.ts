@@ -102,7 +102,7 @@ context('Elements options tests', () => {
         })
     })
 
-     it('Check box', () => { //flacky
+    it('Check box', () => { //flacky
         /*
             * для множественного проставления чек бокса и проверки нужно сделать итератор и проверку на check
             * затем занести текст каждого выбранного чек бокса в массив и проверять через сравнение массивов - все в методе @selectRandomCheckBoxes(iter)
@@ -131,6 +131,7 @@ context('Elements options tests', () => {
         })
         it('Home link click', () => {
             //в cypress нет работы с табами, поэтому удаляем target и просто смотрим редирект
+            // но можно и без удаления target
             linksPage.clickOnHomeLink()
             cy.url().should('eq', Cypress.config().baseUrl)
             cy.go('back')
