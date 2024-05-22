@@ -1,7 +1,14 @@
 import { faker } from '@faker-js/faker/locale/ru';
 import { fakerRU } from '@faker-js/faker';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
-// сюда накидывать методы для генерации данных (пользаки, проекты, названия, улицы, телефоны и тп)
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+dayjs.extend(utc);
+// сюда накидывать методы для генерации данных (названия, улицы, телефоны и тп)
 // можно комбинировать
 export function fakeEmail(prefix: string) {
     let fakeEmail = faker.internet.email({
@@ -57,6 +64,23 @@ export function fakeBirthDate() {
     let fakeDate = fakerRU.date.birthdate()
     return fakeDate
 }
+
+export function generateRandomDate() {
+    const startYear = 1900
+    const endYear = 2077
+    const randomYearInRange = Math.floor(Math.random() * (endYear - startYear + 1)) + startYear
+    const randomMonth = Math.floor(Math.random() * 12) + 1
+    const randomDay = Math.floor(Math.random() * 31) + 1
+
+    const randomDate = dayjs(randomYearInRange + '-' + randomMonth + '-' + randomDay)
+    return randomDate.format('YYYY-MM-DD')
+}
+
+export function getCurrentTime() {
+    const currentTimeGMT4 = dayjs().tz('Europe/Moscow').format('HH:mm');
+    return currentTimeGMT4
+}
+
 export function fakeFirstName() {
     let fakeProjectFullName = fakerRU.person.firstName()
     return fakeProjectFullName
