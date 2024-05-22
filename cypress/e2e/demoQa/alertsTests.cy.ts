@@ -1,4 +1,3 @@
-import { should } from "chai";
 import { blockRequests } from "../../helpers/blockList";
 import { fakeObjectName } from "../../helpers/fakers";
 import { AlertsAndWindowsPage } from "../../pageObjects/alertsAndFramesPage/alertsMainPage";
