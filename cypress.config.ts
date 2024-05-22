@@ -29,6 +29,7 @@ module.exports = defineConfig({
     downloadsFolder: 'C:/Users/vladi/Downloads',
     defaultCommandTimeout: 15000,
     baseUrl,
+    chromeWebSecurity: false,
     trashAssetsBeforeRuns: true,
     experimentalInteractiveRunEvents: true,
     experimentalMemoryManagement: true,

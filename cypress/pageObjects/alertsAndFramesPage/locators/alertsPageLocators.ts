@@ -9,5 +9,8 @@ export default {
     confirmAlertBtn: '[id="confirmButton"]',
     confirmResult: '[id="confirmResult"]',
     promptBoxAlertBtn: '[id="promtButton"]',
-    promptResult: '[id="promptResult"]'
+    promptResult: '[id="promptResult"]',
+    frameLocator: '[id^="frame"] iframe',
+    smallModalBtn: '[id="showSmallModal"]',
+    largeModalBtn: '[id="showLargeModal"]'
 }

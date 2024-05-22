@@ -1,11 +1,14 @@
+import { should } from "chai";
 import { blockRequests } from "../../helpers/blockList";
 import { fakeObjectName } from "../../helpers/fakers";
 import { AlertsAndWindowsPage } from "../../pageObjects/alertsAndFramesPage/alertsMainPage";
 import alertsPageLocators from "../../pageObjects/alertsAndFramesPage/locators/alertsPageLocators";
 import { MainPage } from "../../pageObjects/mainPage/mainPage";
+import { ModalsPage } from "../../pageObjects/alertsAndFramesPage/modalsPage";
 
 const mainPage = new MainPage();
 const alertsPage = new AlertsAndWindowsPage();
+const modalsPage = new ModalsPage();
 
 context('Actions with alerts and windows - tests', () => {
     beforeEach(() => {
@@ -32,7 +35,7 @@ context('Actions with alerts and windows - tests', () => {
             })
             const text = 'This is sample page'
             alertsPage.clickOnBtn(alertsPageLocators.newWindowBtn)
-            cy.get(alertsPageLocators.newWindowOpenedLocator).should('have.text', 'This is a sample page')
+            cy.get(alertsPageLocators.newWindowOpenedLocator).should('have.text', text)
         })
 
         it('New Tab stub', () => {
@@ -107,5 +110,42 @@ context('Actions with alerts and windows - tests', () => {
                 cy.get(alertsPageLocators.promptResult).contains(`You entered ${randomWords}`)
             })
         })
+
+
+    })
+
+    it('Check iframe text', () => {
+        const text = 'This is a sample page'
+        mainPage.openOption('Frames')
+        cy.url().should('match', /frames/)
+        // Находим все элементы iframe с id, начинающимся с "frame"
+        cy.get(alertsPageLocators.frameLocator).each(($iframe) => {
+            cy.wrap($iframe).its('0.contentDocument.body').find('#sampleHeading').then(value => {
+                expect(value.text()).to.be.eq(text)
+            })
+        })
+    })
+
+    it('Check Nested frames data', () => {
+        const parentFrameText = 'Parent frame'
+        const childIFrameText = 'Child Iframe'
+        mainPage.openOption('Nested Frames')
+        cy.url().should('match', /nestedframes/)
+        cy.get(alertsPageLocators.frameLocator).each(($iframe) => {
+            cy.wrap($iframe).its('0.contentDocument.body').eq(0).should('have.text', parentFrameText).then(frame1 => {
+                cy.wrap(frame1).find('iframe').its('0.contentDocument.body').should('have.text', childIFrameText)
+            })
+        })
+    })
+
+    it('Show modal', () => {
+        const smallModalText = 'This is a small modal. It has very less content'
+        const largeModalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        mainPage.openOption('Modal Dialogs')
+        cy.url().should('match', /modal-dialogs/)
+        alertsPage.clickOnBtn(alertsPageLocators.smallModalBtn)
+        modalsPage.checkModalsProps(smallModalText, 300, 220)
+        alertsPage.clickOnBtn(alertsPageLocators.largeModalBtn)
+        modalsPage.checkModalsProps(largeModalText, 800, 340)
     })
 })
