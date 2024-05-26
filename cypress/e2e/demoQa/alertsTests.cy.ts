@@ -1,4 +1,3 @@
-import { should } from "chai";
 import { blockRequests } from "../../helpers/blockList";
 import { fakeObjectName } from "../../helpers/fakers";
 import { AlertsAndWindowsPage } from "../../pageObjects/alertsAndFramesPage/alertsMainPage";
@@ -33,7 +32,7 @@ context('Actions with alerts and windows - tests', () => {
                     win.location.href = 'https://demoqa.com/sample'
                 }).as("newWindow")
             })
-            const text = 'This is sample page'
+            const text = 'This is a sample page'
             alertsPage.clickOnBtn(alertsPageLocators.newWindowBtn)
             cy.get(alertsPageLocators.newWindowOpenedLocator).should('have.text', text)
         })

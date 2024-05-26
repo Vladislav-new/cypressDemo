@@ -4,7 +4,7 @@ import mainPageLocators from "../../pageObjects/mainPage/locators/mainPageLocato
 import { MainPage } from "../../pageObjects/mainPage/mainPage";
 import formsPageLocators from "../../pageObjects/formsPage/locators/formsPageLocators";
 import alertsPageLocators from "../../pageObjects/alertsAndFramesPage/locators/alertsPageLocators";
-import widgetsPageLocators from "../../pageObjects/widgetsPage/locators/widgetsPageLocators";
+import widgetsPageLocators from "../../pageObjects/widgetsPage/locators/widgetsPagesLocators";
 import interactionPageLocators from "../../pageObjects/interactionsPage/locators/interactionPageLocators";
 import bookStorePageLocators from "../../pageObjects/bookStoreAppPage/locators/bookStorePageLocators";
 
