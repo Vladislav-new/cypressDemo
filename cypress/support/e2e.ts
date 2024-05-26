@@ -1,10 +1,9 @@
 import './commands';
-import 'cypress-real-events';
+import 'cypress-real-events'
+import '@shelex/cypress-allure-plugin'
 
 //костыль чтоб ран не падал от ошибок в браузере
-Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from
-    // failing the test
+Cypress.on('uncaught:exception', (err, runnable) => {    
     return false
   })
 //делаем скрин после каждого фейла теста и отправляем его в репорт

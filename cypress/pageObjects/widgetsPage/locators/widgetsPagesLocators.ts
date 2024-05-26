@@ -15,5 +15,22 @@ export default {
     datePickerYearDropDown: '.react-datepicker__year-dropdown',
     datePickerMonth: '.react-datepicker__month-read-view',
     datePickerMonthDropDown: '.react-datepicker__month-dropdown',
-
+    sliderContainer: '[id="sliderContainer"] input[type="range"]',
+    sliderValue: '[id="sliderValue"]',
+    startStopButton: '[id="startStopButton"]',
+    progressBar: '[role="progressbar"]',
+    tabsList: '[role="tablist"]',
+    toolTipBtn: '[id="toolTipButton"]',
+    toolTipTextField: '[id="texFieldToolTopContainer"]',
+    addressLinkHower: 'a:contains("1.10.32")',
+    contraryLinkHower: 'a:contains("Contrary")',
+    listsInMenu: '[id="nav"] [href="#"]',
+    dropDownOptionsWithGroup: '[id="withOptGroup"]',
+    dropDownOptionsOne: '[id="selectOne"]',
+    selectOldStyle: '[id="oldSelectMenu"]',
+    dropDownMenu: '[class $="menu"]',
+    multiSelectField: '[id="react-select-10-input"]',
+    standartSelector: '[id="cars"]',
+    multiValue: '[class$="multiValue"]',
+    option: '[class$="option"]'    
 }

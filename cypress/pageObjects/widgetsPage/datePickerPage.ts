@@ -24,8 +24,13 @@ export class DatePickerPage {
         cy.get(locator).then((hower) => {
             cy.wrap(hower).realClick()
             cy.get(dropdown).children().should('be.visible').then($list => {
-                let random = fakeNumber(0, $list.length - 1)
-                cy.wrap($list).eq(random).scrollIntoView().realClick()
+                if (locator == widgetsPagesLocators.datePickerYear) {
+                    let random = fakeNumber(1, $list.length - 1)                    
+                    cy.wrap($list).eq(random).scrollIntoView().realClick()
+                } else {
+                    let rand = fakeNumber(0, $list.length - 1)                    
+                    cy.wrap($list).eq(rand).scrollIntoView().realClick()
+                }                
             })
         })
     }
