@@ -12,7 +12,8 @@
             "node",
             "@testing-library/cypress",
             "cypress-real-events",
-            "@shelex/cypress-allure-plugin"
+            "@shelex/cypress-allure-plugin",
+            "@4tw/cypress-drag-drop"
         ]
     },
     "include": [
