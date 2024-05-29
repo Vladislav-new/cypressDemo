@@ -86,7 +86,7 @@ context('Actions with widgets', () => {
         })
         it('Date picker - input date with time', () => {
             let currentTime = getCurrentTime()
-            datePickerPage.inputDateTime(`${date} ${currentTime}`)
+            datePickerPage.inputDateTime(`${date} ${currentTime}`) //YYYY-MM-DD HH:mm
             datePickerPage.checkDateTimeInput(date, currentTime)
         })
     })
