@@ -116,7 +116,7 @@ context('Interactions', () => {
         })
     })
 
-    context('Droppable actions', () => {
+    context('Droppable actions', () => { //по сути тот же draggable
         beforeEach(() => {
             interactionsPage.openOption('Droppable')
             cy.url().should('match', /droppable/)
@@ -206,14 +206,15 @@ context('Interactions', () => {
         })
     })
 
-    context('Draggable actions', () => {
+    context('Draggable actions', () => { //need refactoring
         beforeEach(() => {
             interactionsPage.openOption('Dragabble')
             cy.url().should('match', /dragabble/)
         })
 
         const getRectangle = ($el) => $el[0].getBoundingClientRect();
-
+        const getRectangleX = ($el) => $el[0].getBoundingClientRect().x;
+        const getRectangleY = ($el) => $el[0].getBoundingClientRect().y
         it('Simple drag', () => {
             cy.get(interactionPageLocators.dragBox).then(getRectangle).then(rectPositionBox => {
                 interactionsPage.dragAndmouseMove(interactionPageLocators.dragBox, 100, 100)
@@ -224,8 +225,7 @@ context('Interactions', () => {
         })
 
         it('Axis restrict X', () => {
-            //чекаем что при mouseMove по X оси для Y элемента, элемент на месте остается            
-            const getRectangleX = ($el) => $el[0].getBoundingClientRect().x;
+            //чекаем что при mouseMove по X оси для Y элемента, элемент на месте остается
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedY).then(getRectangleX).then(rectPositionXStart => {
                 interactionsPage.dragAndmouseMove(interactionPageLocators.restrictedY, 200, 0)
@@ -236,8 +236,7 @@ context('Interactions', () => {
         })
 
         it('Axis restrict Y', () => {
-            //тут баг сайпреса, при движении смещение по Y оси, либо баг кнопки. Даже при смещении по осям 0 и 0, несоответствие Y оси от изначального положения            
-            const getRectangleY = ($el) => $el[0].getBoundingClientRect().y;
+            //тут баг сайпреса, при движении смещение по Y оси, либо баг кнопки. Даже при смещении по осям 0 и 0, несоответствие Y оси от изначального положения                        
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedX).then(getRectangleY).then(rectPositionYStart => {
                 cy.get(interactionPageLocators.restrictedX).should('exist').trigger('mousedown', { which: 1 }).trigger('mousemove', { clientX: 0, ClientY: 0, force: true })                        
@@ -251,8 +250,7 @@ context('Interactions', () => {
             //возьмем drag элемент и пересунем по координатам за пределы границ dragbox
             //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям            
             interactionsPage.clickOn(interactionPageLocators.containerRestricted)
-            //по y
-            const getRectangleY = ($el) => $el[0].getBoundingClientRect().y            
+            //по y                        
             cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYStart => {               
                 interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, 0, 500)
                 cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYEnd => {
@@ -266,8 +264,7 @@ context('Interactions', () => {
                 })
             })
 
-            //по x
-            const getRectangleX = ($el) => $el[0].getBoundingClientRect().x
+            //по x            
             cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXStart => {
                 interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, -500, 0)
                 cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXEnd => {
@@ -287,7 +284,6 @@ context('Interactions', () => {
             //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям
             interactionsPage.clickOn(interactionPageLocators.containerRestricted)
             //по y
-            const getRectangleY = ($el) => $el[0].getBoundingClientRect().y   
             cy.contains(`I'm contained within my parent`).as('parentDragabble')         
             cy.get('@parentDragabble').then(getRectangleY).then(rectPositionYStart => {               
                 interactionsPage.dragAndmouseMove('@parentDragabble', 0, 500)
@@ -303,7 +299,6 @@ context('Interactions', () => {
             })
 
             //по x
-            const getRectangleX = ($el) => $el[0].getBoundingClientRect().x
             cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXStart => {
                 interactionsPage.dragAndmouseMove('@parentDragabble', -500, 0)
                 cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXEnd => {

@@ -8,14 +8,17 @@ export class InteractionPage extends MainPage {
             target: { x: width, y: height },                    
             force: true
         })
+        cy.log(`Change size to width:${width}, height:${height}`)
     }
 
     resizeUnlimBox(width: number, height: number) {
-        cy.get(interactionPageLocators.resizableUnlimBoxHandler).move({deltaX: width, deltaY: height })            
+        cy.get(interactionPageLocators.resizableUnlimBoxHandler).move({deltaX: width, deltaY: height })
+        cy.log(`Change size to width:${width}, height:${height}`)
     }
     //ээээээээксперименты
     setWidthAndHeightValue(width: number, height: number) {
-        cy.get('#resizableBoxWithRestriction').invoke('attr', 'style', `width: ${width}px; height: ${height}px;`).trigger('change');
+        cy.get('#resizableBoxWithRestriction').invoke('attr', 'style', `width: ${width}px; height: ${height}px;`).trigger('change')
+        cy.log(`Change size to width:${width}, height:${height}`)
       }
 
     dragNdrop(locatorFrom, locatorTo) {
@@ -67,12 +70,12 @@ export class InteractionPage extends MainPage {
         }
     }
 
-    areOverlapping = (rect1, rect2) => {
-        if (rect1.right < rect2.left || rect2.right < rect1.left) {
+    areOverlapping = (rectFirst, rectNext) => {
+        if (rectFirst.right < rectNext.left || rectNext.right < rectFirst.left) {
             return false
         }
 
-        if (rect1.bottom < rect2.top || rect2.bottom < rect1.top) {
+        if (rectFirst.bottom < rectNext.top || rectNext.bottom < rectFirst.top) {
             return false
         }
         return true

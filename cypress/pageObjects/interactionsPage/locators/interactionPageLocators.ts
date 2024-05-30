@@ -27,6 +27,5 @@ export default {
     restrictedX: '#restrictedX',
     restrictedY: '#restrictedY',
     containerRestricted: '#draggableExample-tab-containerRestriction',
-    containerDragabble: '#containmentWrapper>div',
-    
+    containerDragabble: '#containmentWrapper>div',    
 }
