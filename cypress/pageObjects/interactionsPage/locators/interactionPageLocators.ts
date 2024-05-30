@@ -26,5 +26,7 @@ export default {
     tabAxisRestrict: '#draggableExample-tab-axisRestriction',
     restrictedX: '#restrictedX',
     restrictedY: '#restrictedY',
-
+    containerRestricted: '#draggableExample-tab-containerRestriction',
+    containerDragabble: '#containmentWrapper>div',
+    
 }

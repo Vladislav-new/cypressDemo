@@ -228,7 +228,7 @@ context('Interactions', () => {
             const getRectangleX = ($el) => $el[0].getBoundingClientRect().x;
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedY).then(getRectangleX).then(rectPositionXStart => {
-                interactionsPage.dragAndmouseMove(interactionPageLocators.restrictedY, 200, 0)                
+                interactionsPage.dragAndmouseMove(interactionPageLocators.restrictedY, 200, 0)
                 cy.get(interactionPageLocators.restrictedY).then(getRectangleX).then(rectPositionXEnd => {
                     expect(rectPositionXStart).to.eq(rectPositionXEnd)
                 })
@@ -236,14 +236,84 @@ context('Interactions', () => {
         })
 
         it('Axis restrict Y', () => {
-            //тут баг сайпреса, при движении смещение по Y оси, либо баг кнопки. Даже при смещении по осям 0 и 0, несоовтетствие Y оси от изначального положения            
+            //тут баг сайпреса, при движении смещение по Y оси, либо баг кнопки. Даже при смещении по осям 0 и 0, несоответствие Y оси от изначального положения            
             const getRectangleY = ($el) => $el[0].getBoundingClientRect().y;
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedX).then(getRectangleY).then(rectPositionYStart => {
-                cy.get(interactionPageLocators.restrictedX).should('exist').trigger('mousedown', { which: 1 }).trigger('mousemove',{clientX:0, ClientY:0, force: true })
-                //interactionsPage.dragAndmouseMove(interactionPageLocators.restrictedX, 2.3333435058594, 0)         
+                cy.get(interactionPageLocators.restrictedX).should('exist').trigger('mousedown', { which: 1 }).trigger('mousemove', { clientX: 0, ClientY: 0, force: true })                        
                 cy.get(interactionPageLocators.restrictedX).then(getRectangleY).then(rectPositionYEnd => {
                     expect(rectPositionYStart).to.eq(rectPositionYEnd)
+                })
+            })
+        })
+
+        it('Container Restricted box', () => {
+            //возьмем drag элемент и пересунем по координатам за пределы границ dragbox
+            //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям            
+            interactionsPage.clickOn(interactionPageLocators.containerRestricted)
+            //по y
+            const getRectangleY = ($el) => $el[0].getBoundingClientRect().y            
+            cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYStart => {               
+                interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, 0, 500)
+                cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYEnd => {
+                    expect(rectPositionYStart).to.not.eq(rectPositionYEnd)
+                })
+            })
+            cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYStart => {
+                interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, 0, 560)
+                cy.get(interactionPageLocators.containerDragabble).then(getRectangleY).then(rectPositionYEnd => {
+                    expect(rectPositionYStart).to.eq(rectPositionYEnd)
+                })
+            })
+
+            //по x
+            const getRectangleX = ($el) => $el[0].getBoundingClientRect().x
+            cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXStart => {
+                interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, -500, 0)
+                cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXEnd => {
+                    expect(rectPositionXStart).to.eq(rectPositionXEnd)
+                })
+            })
+            cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXStart => {
+                interactionsPage.dragAndmouseMove(interactionPageLocators.containerDragabble, 200, 0)
+                cy.get(interactionPageLocators.containerDragabble).then(getRectangleX).then(rectPositionXEnd => {
+                    expect(rectPositionXStart).to.not.eq(rectPositionXEnd)
+                })
+            })
+        })
+
+        it('Container Restricted value in parent', () => {
+            //возьмем drag элемент и пересунем по координатам за пределы границ dragbox
+            //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям
+            interactionsPage.clickOn(interactionPageLocators.containerRestricted)
+            //по y
+            const getRectangleY = ($el) => $el[0].getBoundingClientRect().y   
+            cy.contains(`I'm contained within my parent`).as('parentDragabble')         
+            cy.get('@parentDragabble').then(getRectangleY).then(rectPositionYStart => {               
+                interactionsPage.dragAndmouseMove('@parentDragabble', 0, 500)
+                cy.get('@parentDragabble').then(getRectangleY).then(rectPositionYEnd => {
+                    expect(rectPositionYStart).to.not.eq(rectPositionYEnd)
+                })
+            })
+            cy.get('@parentDragabble').then(getRectangleY).then(rectPositionYStart => {
+                interactionsPage.dragAndmouseMove('@parentDragabble', 0, 560)
+                cy.get('@parentDragabble').then(getRectangleY).then(rectPositionYEnd => {
+                    expect(rectPositionYStart).to.eq(rectPositionYEnd)
+                })
+            })
+
+            //по x
+            const getRectangleX = ($el) => $el[0].getBoundingClientRect().x
+            cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXStart => {
+                interactionsPage.dragAndmouseMove('@parentDragabble', -500, 0)
+                cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXEnd => {
+                    expect(rectPositionXStart).to.eq(rectPositionXEnd)
+                })
+            })
+            cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXStart => {
+                interactionsPage.dragAndmouseMove('@parentDragabble', 200, 0)
+                cy.get('@parentDragabble').then(getRectangleX).then(rectPositionXEnd => {
+                    expect(rectPositionXStart).to.not.eq(rectPositionXEnd)
                 })
             })
         })
