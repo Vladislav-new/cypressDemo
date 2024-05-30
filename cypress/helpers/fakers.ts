@@ -77,6 +77,7 @@ export function generateRandomDate() {
 }
 
 export function getCurrentTime() {
+  
     const currentTimeGMT4 = dayjs().tz('Europe/Moscow').format('HH:mm')
     return currentTimeGMT4
 }
