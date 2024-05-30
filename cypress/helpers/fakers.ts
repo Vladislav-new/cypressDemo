@@ -30,13 +30,13 @@ export function fakeAddress() {
     return fakeAddress
 }
 export function fakeObjectName() {
-    let fakeObjectName = `AT ${fakerRU.lorem.words(2)}`;
-    let truncatedObjectName = fakeObjectName.substring(0, 30);
+    let fakeObjectName = `AT ${fakerRU.lorem.words(2)}`
+    let truncatedObjectName = fakeObjectName.substring(0, 30)
     return truncatedObjectName
 }
 export function fakeNameForEngineering() {
     let fakeObjectName = `AT ${faker.number.int({ min: 0, max: 99 })} ${fakerRU.lorem.words(1)}` //30 символов лимит
-    let truncatedProjectName = fakeObjectName.substring(0, 23);
+    let truncatedProjectName = fakeObjectName.substring(0, 23)
     return truncatedProjectName
 }
 export function fakeFullName() {
@@ -54,10 +54,10 @@ export function fakeSubject(): string {
         'Biology',
         'Art',
         'Accounting',
-    ];
+    ]
 
-    const randomIndex = Math.floor(Math.random() * subjects.length);
-    return subjects[randomIndex];
+    const randomIndex = Math.floor(Math.random() * subjects.length)
+    return subjects[randomIndex]
 }
 
 export function fakeBirthDate() {
@@ -77,7 +77,8 @@ export function generateRandomDate() {
 }
 
 export function getCurrentTime() {
-    const currentTimeGMT4 = dayjs().tz('Europe/Moscow').format('HH:mm');
+  
+    const currentTimeGMT4 = dayjs().tz('Europe/Moscow').format('HH:mm')
     return currentTimeGMT4
 }
 
@@ -100,7 +101,7 @@ export function fakeNumber(min, max) {
 
 export function fakeDepartment() {
     let fakeNumber = fakerRU.company.buzzPhrase()
-    let truncatedDepartnemtName = fakeNumber.substring(0, 24);
+    let truncatedDepartnemtName = fakeNumber.substring(0, 24)
     return truncatedDepartnemtName
 }
 
@@ -109,6 +110,6 @@ export function fakeNumeric(max) {
     return fakeNumber
 }
 export function fakeSymbol(min, max) {
-    const fakeSymbol = faker.string.symbol({ min, max });
+    const fakeSymbol = faker.string.symbol({ min, max })
     return fakeSymbol
 }

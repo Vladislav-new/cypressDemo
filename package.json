@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Vladislav-new/portfolio-Cypress#readme",
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.5",
     "@faker-js/faker": "^8.4.1",
     "@shelex/cypress-allure-plugin": "^2.40.2",
     "@testing-library/cypress": "^10.0.1",
