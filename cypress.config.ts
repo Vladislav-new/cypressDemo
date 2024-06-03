@@ -1,7 +1,7 @@
 const { defineConfig } = require('cypress');
 const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
-let baseUrl="https://demoqa.com/";
+let baseUrl = "https://demoqa.com/";
 
 module.exports = defineConfig({
   // "reporter": "@shelex/cypress-allure-plugin/writer",
@@ -20,15 +20,17 @@ module.exports = defineConfig({
     runMode: 1,
     openMode: 0,
   },
-  env: {    
-    hideXHR: true,
+  env: {
+    hideXHR: false,
+    RECAPTCHA_SITE_KEY: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
   },
   viewportWidth: 1920,
   viewportHeight: 1080,
+  chromeWebSecurity: false,
   e2e: {
     downloadsFolder: 'C:/Users/vladi/Downloads',
     defaultCommandTimeout: 15000,
-    baseUrl,
+    baseUrl,    
     chromeWebSecurity: false,
     trashAssetsBeforeRuns: true,
     experimentalInteractiveRunEvents: true,

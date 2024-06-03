@@ -29,13 +29,25 @@ import '@4tw/cypress-drag-drop'
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+declare global {
+  namespace Cypress {
+    interface Chainable {      
+      confirmCaptcha(value?: string /* eslint-disable-line */): Chainable<any>      
+    }
+  }
+}
+
+Cypress.Commands.add('confirmCaptcha', function () {
+    cy.get('iframe')
+      .first()
+      .then((recaptchaIframe) => {
+        const body = recaptchaIframe.contents()
+        cy.wrap(body).find('.recaptcha-checkbox-border').should('be.visible').realHover().realClick()
+      })
+    cy.window().then(win => {
+        return win.grecaptcha.execute('6LeJ_e8pAAAAAEeYCo9S2KcbcGkLfXz8SHuBadxK').then(token => {
+          cy.get('input[name="g-recaptcha-response"]').invoke('val', token)
+          cy.get('form').submit()
+        })
+      })
+  })

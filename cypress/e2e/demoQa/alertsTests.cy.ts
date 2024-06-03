@@ -109,8 +109,6 @@ context('Actions with alerts and windows - tests', () => {
                 cy.get(alertsPageLocators.promptResult).contains(`You entered ${randomWords}`)
             })
         })
-
-
     })
 
     it('Check iframe text', () => {

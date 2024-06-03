@@ -4,7 +4,8 @@ export function blockRequests() {
       '**/*.svg',
       '**/*gpt.js',
       '**/*adsbygoogle.js',
-      'https://pagead2.googlesyndication.com/**'
+      'https://pagead2.googlesyndication.com/**',
+      //'*recaptcha__*.js'
     ];
   
     urlsToBlock.forEach(url => {
