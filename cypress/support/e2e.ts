@@ -1,6 +1,5 @@
 import './commands';
 import 'cypress-real-events'
-import '@shelex/cypress-allure-plugin'
 import '@4tw/cypress-drag-drop'
 
 //костыль чтоб ран не падал от ошибок в браузере

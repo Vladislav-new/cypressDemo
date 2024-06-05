@@ -16,13 +16,15 @@ export class BookStoreAPI {
     }
 
     authorizeRequest(login: string, pass: string) {
-        cy.request({
+        return cy.request({
             method: 'POST',
             url: 'Account/v1/Authorized',
             body: {
                 userName: login,
                 password: pass
             }
+        }).then(response => {
+            return response;
         })
     }
 
@@ -92,8 +94,8 @@ export class BookStoreAPI {
             return response
         })
     }
-    
-    updateBookList(token: string, userId: string, bookISBN: string, newISBN:string) {
+
+    updateBookList(token: string, userId: string, bookISBN: string, newISBN: string) {
         return cy.request({
             method: 'PUT',
             url: `BookStore/v1/Books/${bookISBN}`,
@@ -161,7 +163,8 @@ export class BookStoreAPI {
             body: {
                 userName: user,
                 password: pass
-            }
+            },
+            failOnStatusCode: false
         }).then(response => {
             return response;
         })

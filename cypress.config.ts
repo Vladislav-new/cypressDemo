@@ -1,21 +1,17 @@
 const { defineConfig } = require('cypress');
-const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+const cypressSplit = require('cypress-split')
 
 let baseUrl = "https://demoqa.com/";
 
-module.exports = defineConfig({
-  // "reporter": "@shelex/cypress-allure-plugin/writer",
-  // "allure": {
-  //   "resultsDir": "allure-results",
-  //   "disableWebdriverStepsReporting": true,
-  //   "disableWebdriverScreenshotsReporting": true,
-  //   "allureTestOps": {
-  //     "enabled": false,
-  //    // "url": "https://allure.contrust.team/",
-  //    // "projectId": process.env.PROJECT_ID,
-  //    // "token": "glpat-nNUcenB9FfRyKepsHxw1"
-  //   }
-  // },
+module.exports = defineConfig({  
+  reporter: 'mochawesome',
+  reporterOptions: {
+    reportDir: 'cypress/results',
+    reportFilename: '[name].html',
+    overwrite: true,
+    html: true,
+    json: false,
+  },
   retries: {
     runMode: 1,
     openMode: 0,
@@ -38,7 +34,7 @@ module.exports = defineConfig({
     numTestsKeptInMemory: 10,
     video: false,
     setupNodeEvents(on, config) {
-      //allureWriter(on, config);
+      cypressSplit(on, config)
       return config;
     },
   },

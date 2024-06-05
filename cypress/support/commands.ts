@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import '@testing-library/cypress/add-commands'
-import '@shelex/cypress-allure-plugin'
 import '@4tw/cypress-drag-drop'
 import Ajv from 'ajv'
 

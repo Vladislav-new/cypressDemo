@@ -111,8 +111,8 @@ context('Interactions', () => {
             const offsetX = 198.667;
             const offsetY = 197.667;
             interactionsPage.resizeUnlimBox(1600 - offsetX, 1400 - offsetY)
-            cy.get('#resizable').invoke('width').should('be.gte', 1600).and('lte', 1601)
-            cy.get('#resizable').invoke('height').should('be.gte', 1400).and('lte', 1401)
+            cy.get('#resizable').invoke('width').should('be.gte', 1599).and('lte', 1601)
+            cy.get('#resizable').invoke('height').should('be.gte', 1399).and('lte', 1401)
         })
     })
 

@@ -12,21 +12,25 @@ afterEach(() => {
     cy.log(`Test ${Cypress.currentTest.title} completed`)
 })
 
-const userName = fakeEmail('api');
 const password = 'QwErTy!156';
-const booksList = ['9781449325862', '9781449331818', '9781449337711', '9781449365035', '9781491904244', '9781593277574']
+const booksList = ['9781449325862', '9781449331818', '9781449337711', '9781449365035', '9781491904244', '9781593277574'];
 
 context('account CRUD', () => {
-
-
+    const userName = fakeEmail('accountCRUD');
     beforeEach(() => {
         bookStoreAPI.prepareUserWithBooks(userName, password, booksList)
     })
+    afterEach(() => {
+        bookStoreAPI.generateToken(userName, password).then(response => {
+            const newToken = response.body.token;
+            bookStoreAPI.deleteUser(newToken, userName, password)
+        })
+    })
 
     it('authorized', () => {
-        cy.intercept('POST', /\/Account\/v1\/Authorized/).as('login')
-        bookStoreAPI.authorizeRequest(userName, password)
-        cy.wait('@login').its('response.statusCode').should('eq', 200)
+        bookStoreAPI.authorizeRequest(userName, password).then(response => {
+            expect(response.status).to.eq(200)
+        })
     })
 
     it('genereateToken', () => {
@@ -43,9 +47,11 @@ context('account CRUD', () => {
     })
 
     it('User delete', () => {
-        bookStoreAPI.generateToken(userName, password).then(respToken => {
+        const NewUserName = fakeEmail('delete');
+        bookStoreAPI.prepareUserWithBooks(NewUserName, password, booksList)
+        bookStoreAPI.generateToken(NewUserName, password).then(respToken => {
             const token = respToken.body.token;
-            bookStoreAPI.deleteUser(token, userName, password)
+            bookStoreAPI.deleteUser(token, NewUserName, password)
         })
     })
 
@@ -74,11 +80,20 @@ context('account CRUD', () => {
 })
 
 context('books CRUD', () => {
+    const userName = fakeEmail('booksCRUD');
     beforeEach(() => {
         bookStoreAPI.prepareUserWithBooks(userName, password, booksList)
     })
+
+    afterEach(() => {
+        bookStoreAPI.generateToken(userName, password).then(response => {
+            const newToken = response.body.token;
+            bookStoreAPI.deleteUser(newToken, userName, password)
+        })
+    })
+
     it('get all books and schema assert', () => {
-        cy.fixture('booksSchemaJson').then((bookSchema) => {
+        cy.fixture('booksSchema').then((bookSchema) => {
             bookStoreAPI.getBookList().then(bookList => {
                 cy.validateSchema(bookList, bookSchema).then(() => {
                     cy.log('JSON is valid')
