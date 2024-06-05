@@ -7,7 +7,7 @@ jobs:
   merge-reports:
     uses: bahmutov/cypress-workflows/.github/workflows/split.yml@v2
     with:
-      browser: Chrome
+      browser: chrome
       nE2E: 3
       start: npx cypress run --browser chrome
       # merge all test reports into one
