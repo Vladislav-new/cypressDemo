@@ -41,8 +41,8 @@ jobs:
           SPLIT_INDEX: ${{ strategy.job-index }}
   
   upload-artifact:
-  if: always()
-  runs-on: ubuntu-latest
+    if: always()
+    runs-on: ubuntu-latest
     steps:
       - name: Upload reports
         uses: actions/upload-artifact@v4        
