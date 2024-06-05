@@ -27,26 +27,26 @@ context('account CRUD', () => {
         })
     })
 
-    it('authorized', () => {
+    it('authorized', { tags: ['API', 'regression'] }, () => {
         bookStoreAPI.authorizeRequest(userName, password).then(response => {
             expect(response.status).to.eq(200)
         })
     })
 
-    it('genereateToken', () => {
+    it('genereateToken', { tags: ['API', 'regression'] }, () => {
         bookStoreAPI.generateToken(userName, password).then(resp => {
             expect(resp.body.token).to.be.not.null
         })
     })
 
-    it('User create', () => {
+    it('User create', { tags: ['API', 'regression'] }, () => {
         const newUser = fakeEmail('api');
         bookStoreAPI.createNewUser(newUser, password).then(resp => {
             expect(resp.body.username).to.eq(newUser)
         })
     })
 
-    it('User delete', () => {
+    it('User delete', { tags: ['API', 'regression'] }, () => {
         const NewUserName = fakeEmail('delete');
         bookStoreAPI.prepareUserWithBooks(NewUserName, password, booksList)
         bookStoreAPI.generateToken(NewUserName, password).then(respToken => {
@@ -55,7 +55,7 @@ context('account CRUD', () => {
         })
     })
 
-    it('get user data', () => {
+    it('get user data', { tags: ['API', 'regression'] }, () => {
         bookStoreAPI.generateToken(userName, password).then(respToken => {
             const token = respToken.body.token;
             bookStoreAPI.getUserData(token, userName, password).then(userDataResp => {
@@ -92,7 +92,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('get all books and schema assert', () => {
+    it('get all books and schema assert', { tags: ['API', 'regression'] }, () => {
         cy.fixture('booksSchema').then((bookSchema) => {
             bookStoreAPI.getBookList().then(bookList => {
                 cy.validateSchema(bookList, bookSchema).then(() => {
@@ -102,7 +102,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('add books to user and schema assert', () => {
+    it('add books to user and schema assert', { tags: ['API', 'regression'] }, () => {
         cy.fixture('addNewBookToUserSchema').then((addNewBookSchema) => {
             const bookId = '9781593275846';
             bookStoreAPI.generateToken(userName, password).then(tokenResponse => {
@@ -119,7 +119,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('delete all books from user', () => {
+    it('delete all books from user', { tags: ['API', 'regression'] }, () => {
         bookStoreAPI.generateToken(userName, password).then(tokenResponse => {
             const token = tokenResponse.body.token;
             bookStoreAPI.getUserData(token, userName, password).then(userDataResponse => {
@@ -134,7 +134,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('get book detail', () => {
+    it('get book detail', { tags: ['API', 'regression'] }, () => {
         cy.fixture('bookDetailsSchema').then((bookDetailsSchema) => {
             const bookId = '9781449331818';
             bookStoreAPI.generateToken(userName, password).then(tokenResponse => {
@@ -148,7 +148,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('delete book', () => {
+    it('delete book', { tags: ['API', 'regression'] }, () => {
         const bookISBN = '9781449331818';
         bookStoreAPI.generateToken(userName, password).then(tokenResponse => {
             const token = tokenResponse.body.token;
@@ -172,7 +172,7 @@ context('books CRUD', () => {
         })
     })
 
-    it('update user`s book list - change', () => {
+    it('update user`s book list - change', { tags: ['API', 'regression'] }, () => {
         const bookISBN = '9781449331818';
         const newISBN = '9781593275846';
         bookStoreAPI.generateToken(userName, password).then(tokenResponse => {

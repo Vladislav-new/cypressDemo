@@ -12,7 +12,8 @@
             "node",
             "@testing-library/cypress",
             "cypress-real-events",
-            "@4tw/cypress-drag-drop"
+            "@4tw/cypress-drag-drop",
+            "@cypress/grep"        
         ]
     },
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,

@@ -32,7 +32,7 @@ context('Books e2e', () => {
         })
     })
 
-    it('Books in list', () => {
+    it('Books in list', { tags: ['e2e', 'regression'] }, () => {
         /*
         * по предварительным данным создается пользователь с набором книг
         * заходим в аккаунт
@@ -55,7 +55,7 @@ context('Books e2e', () => {
     })
 })
 
-context('Profile e2e', () => {
+context('Profile e2e', { tags: ['e2e', 'regression'] }, () => {
     it('Delete all books and account', () => {
         cy.intercept('DELETE','/BookStore/v1/Books*').as('deleteAllBooks')
         cy.intercept('DELETE', '/Account/v1/User/*').as('deleteAccount')

@@ -1,3 +1,6 @@
+// @see error 2306 https://github.com/microsoft/TypeScript/blob/3fcd1b51a1e6b16d007b368229af03455c7d5794/src/compiler/diagnosticMessages.json#L1635
+//const registerCypressGrep = require('@cypress/grep')
+
 const { defineConfig } = require('cypress');
 // @ts-ignore
 const cypressSplit = require('cypress-split')
@@ -39,6 +42,7 @@ module.exports = defineConfig({
     video: false,
     setupNodeEvents(on, config) {
       cypressSplit(on, config)
+      require('@cypress/grep/src/plugin')(config);
       return config;
     },
   },

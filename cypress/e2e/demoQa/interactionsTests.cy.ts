@@ -20,7 +20,7 @@ context('Interactions', () => {
             interactionsPage.openOption('Sortable');
             cy.url().should('match', /sortable/)
         })
-        it('List', () => {
+        it('List', { tags: ['UI', 'regression'] }, () => {
             cy.get(interactionPageLocators.listOfElements).should('have.length', 6).then(items => {
                 const initialOrder = Cypress._.map(items, 'textContent')
                 let fromIndex = Cypress._.random(0, 5)
@@ -37,7 +37,7 @@ context('Interactions', () => {
             })
         })
 
-        it('Grid', () => { //дублирование кода есть но если убрать все под метод то читаемость падает
+        it('Grid', { tags: ['UI', 'regression'] }, () => { //дублирование кода есть но если убрать все под метод то читаемость падает
             interactionsPage.clickOn(interactionPageLocators.tabGridElems)
             cy.get(interactionPageLocators.gridOfElements).should('have.length', 9).then(items => {
                 const initialOrder = Cypress._.map(items, 'textContent')
@@ -61,17 +61,17 @@ context('Interactions', () => {
             interactionsPage.openOption('Selectable')
             cy.url().should('match', /selectable/)
         })
-        it('Make a smile', () => {
+        it('Make a smile', { tags: ['UI', 'regression'] }, () => {
             const smileArr = ['One', 'Three', 'Nine', 'Eight', 'Seven']
             interactionsPage.clickOn(interactionPageLocators.tabGridElems)
             interactionsPage.clickGridElement(...smileArr)
         })
-        it('Random click element - list', () => {
+        it('Random click element - list', { tags: ['UI', 'regression'] }, () => {
             for (let i = 0; i < 5; i++) {
                 interactionsPage.clickOnRandomElement(interactionPageLocators.selectList)
             }
         })
-        it('Random click element - grid', () => {
+        it('Random click element - grid', { tags: ['UI', 'regression'] }, () => {
             interactionsPage.clickOn(interactionPageLocators.tabGridElems)
             for (let i = 0; i < 5; i++) {
                 interactionsPage.clickOnRandomElement(interactionPageLocators.gridOfElements)
@@ -84,7 +84,7 @@ context('Interactions', () => {
             interactionsPage.openOption('Resizable')
             cy.url().should('match', /resizable/)
         })
-        it('Restricted resize', () => {
+        it('Restricted resize', { tags: ['UI', 'regression'] }, () => {
             interactionsPage.resizeBox(100, 100) //по каким то причинам react компонент тут по точным координатам не пытается провести drop
             cy.get('#resizableBoxWithRestriction').invoke('width').should('be.lte', 150)
             cy.get('#resizableBoxWithRestriction').invoke('height').should('be.lte', 150)
@@ -105,7 +105,7 @@ context('Interactions', () => {
             cy.get('#resizableBoxWithRestriction').invoke('height').should('be.gte', 200).and('be.lte', 251)
         })
 
-        it('Unlimited resizable box', () => {
+        it('Unlimited resizable box', { tags: ['UI', 'regression'] }, () => {
             //до точных значений остаются десятые и тысячные и при использовании методов плагина 4w X и Y значения имеют наложение(не понятно откуда)
             //константами калибруем до указанных значений в методе и в ассерте, чтоб проверять  вхождение по границам
             const offsetX = 198.667;
@@ -122,12 +122,12 @@ context('Interactions', () => {
             cy.url().should('match', /droppable/)
         })
 
-        it('DragNDrop', () => {
+        it('DragNDrop', { tags: ['UI', 'regression'] }, () => {
             cy.get(interactionPageLocators.draggable).drag(interactionPageLocators.droppable, { force: true })
             cy.get(interactionPageLocators.droppable).should('have.css', 'background-color', 'rgb(70, 130, 180)')
         })
 
-        it('Accept', () => {
+        it('Accept', { tags: ['UI', 'regression'] }, () => {
             interactionsPage.clickOn(interactionPageLocators.acceptTabInDroppable)
             interactionsPage.dragNdrop(interactionPageLocators.notAcceptable, interactionPageLocators.acceptDroppable)
             interactionsPage.checkBackgroundColor(interactionPageLocators.acceptDroppable, 'rgba(0, 0, 0, 0)') //смотрим что бокс не изменил цвет
@@ -137,7 +137,7 @@ context('Interactions', () => {
             interactionsPage.checkBackgroundColor(interactionPageLocators.acceptDroppable, 'rgb(70, 130, 180)')
         })
 
-        it('Propogation', () => { //можно было бы разбить на множество мелких тестов, но потаскать решил в одном
+        it('Propogation', { tags: ['UI', 'regression'] }, () => { //можно было бы разбить на множество мелких тестов, но потаскать решил в одном
             interactionsPage.clickOn(interactionPageLocators.propogationTab)
             //move dragBox and check colors of both boxes
             interactionsPage.dragAndmouseMove(interactionPageLocators.dragBox, 100, 100)
@@ -178,7 +178,7 @@ context('Interactions', () => {
             interactionsPage.checkDroppableText(interactionPageLocators.greedyDropBoxInnerPropogation)
         })
 
-        it('Revert', () => {
+        it('Revert', { tags: ['UI', 'regression'] }, () => {
             const getRectangle = ($el) => $el[0].getBoundingClientRect()
             interactionsPage.clickOn(interactionPageLocators.revertTab)
             interactionsPage.dragAndmouseMove(interactionPageLocators.revertableBox, 100, 0)
@@ -215,7 +215,7 @@ context('Interactions', () => {
         const getRectangle = ($el) => $el[0].getBoundingClientRect();
         const getRectangleX = ($el) => $el[0].getBoundingClientRect().x;
         const getRectangleY = ($el) => $el[0].getBoundingClientRect().y
-        it('Simple drag', () => {
+        it('Simple drag', { tags: ['UI', 'regression'] }, () => {
             cy.get(interactionPageLocators.dragBox).then(getRectangle).then(rectPositionBox => {
                 interactionsPage.dragAndmouseMove(interactionPageLocators.dragBox, 100, 100)
                 cy.get(interactionPageLocators.dragBox).then(getRectangle).then(rectNextPositionBox => {
@@ -224,7 +224,7 @@ context('Interactions', () => {
             })
         })
 
-        it('Axis restrict X', () => {
+        it('Axis restrict X', { tags: ['UI', 'regression'] }, () => {
             //чекаем что при mouseMove по X оси для Y элемента, элемент на месте остается
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedY).then(getRectangleX).then(rectPositionXStart => {
@@ -235,7 +235,7 @@ context('Interactions', () => {
             })
         })
 
-        it('Axis restrict Y', () => {
+        it('Axis restrict Y', { tags: ['UI', 'regression'] }, () => { //failed
             //тут баг сайпреса, при движении смещение по Y оси, либо баг кнопки. Даже при смещении по осям 0 и 0, несоответствие Y оси от изначального положения                        
             interactionsPage.clickOn(interactionPageLocators.tabAxisRestrict)
             cy.get(interactionPageLocators.restrictedX).then(getRectangleY).then(rectPositionYStart => {
@@ -246,7 +246,7 @@ context('Interactions', () => {
             })
         })
 
-        it('Container Restricted box', () => {
+        it('Container Restricted box', { tags: ['UI', 'regression'] }, () => {
             //возьмем drag элемент и пересунем по координатам за пределы границ dragbox
             //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям            
             interactionsPage.clickOn(interactionPageLocators.containerRestricted)
@@ -279,7 +279,7 @@ context('Interactions', () => {
             })
         })
 
-        it('Container Restricted value in parent', () => {
+        it('Container Restricted value in parent', { tags: ['UI', 'regression'] }, () => {
             //возьмем drag элемент и пересунем по координатам за пределы границ dragbox
             //ожидаем, что элемент не пересечет границ проверив положение элемента - не соответствует заданной позиции на offset по осям
             interactionsPage.clickOn(interactionPageLocators.containerRestricted)

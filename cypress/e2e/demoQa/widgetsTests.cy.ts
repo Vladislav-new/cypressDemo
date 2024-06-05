@@ -30,7 +30,7 @@ context('Actions with widgets', () => {
     afterEach(() => {
         cy.log(`Test ${Cypress.currentTest.title} completed`)
     })
-    it('Accordian', () => {
+    it('Accordian', { tags: ['UI', 'regression'] }, () => {
         mainPage.openOption('Accordian')
         cy.url().should('match', /accordian/)
         cy.get('.accordion').eq(1).children().each((accordion) => {
@@ -40,7 +40,7 @@ context('Actions with widgets', () => {
         })
     })
 
-    it('Autocomplete', () => {
+    it('Autocomplete', { tags: ['UI', 'regression'] }, () => {
         const colorMap: { [key: string]: string } = {
             red: 're',
             blue: 'bl',
@@ -66,32 +66,32 @@ context('Actions with widgets', () => {
         autoCompletePage.checkSingleColor(randomKey)
     })
 
-    context('DatePicker', () => {
+    context('DatePicker', { tags: ['UI', 'regression'] }, () => {
         let date = generateRandomDate()
         beforeEach(() => {
             mainPage.openOption('Date Picker')
             cy.url().should('match', /date-picker/)
         })
-        it('Date Picker - calendar', () => {
+        it('Date Picker - calendar', { tags: ['UI', 'regression'] }, () => {
             datePickerPage.selectRandomDateFromCalendar()
         })
 
-        it('Date Picker - input date in calendar', () => {
+        it('Date Picker - input date in calendar', { tags: ['UI', 'regression'] }, () => {
             datePickerPage.inputDate(date)
             datePickerPage.checkDateInInput(`${date}`)
         })
 
-        it('Date picker - calendar with time', () => {
+        it('Date picker - calendar with time', { tags: ['UI', 'regression'] }, () => {
             datePickerPage.selectRandomDateTimeFromCalendar()
         })
-        it('Date picker - input date with time', () => {
+        it('Date picker - input date with time', { tags: ['UI', 'regression'] }, () => {
             let currentTime = getCurrentTime()
             datePickerPage.inputDateTime(`${date} ${currentTime}`) //YYYY-MM-DD HH:mm
             datePickerPage.checkDateTimeInput(date, currentTime)
         })
     })
 
-    it('Slider set value', () => {
+    it('Slider set value', { tags: ['UI', 'regression'] }, () => {
         mainPage.openOption('Slider')
         cy.url().should('match', /slider/)
         const randomValue = fakeNumber(0, 100)
@@ -99,7 +99,7 @@ context('Actions with widgets', () => {
         sliderPage.checkSliderValue(randomValue)
     })
 
-    it('Progress bar', () => {
+    it('Progress bar', { tags: ['UI', 'regression'] }, () => {
         //запускаем прогресс бар на случайное число секунд от 1 до 10,
         //затем останавливаем и проверяем ширину элемента
         mainPage.openOption('Progress Bar')
@@ -109,7 +109,7 @@ context('Actions with widgets', () => {
         progressBarPage.checkPercentage(percent)
     })
 
-    it('Tabs', () => {
+    it('Tabs', { tags: ['UI', 'regression'] }, () => {
         //прокликиваем все активные табы и проверяем атрибут aria-selected true у отмеченного таба
         //не активные табы не кликаем а смотрим, что они просто есть
         //тут решил не создавать отдельный класс и метод, тест слишком короткий
@@ -134,7 +134,7 @@ context('Actions with widgets', () => {
         ]
         //можно еще session добавить чтоб постоянно на страницу не ходить а продолжать тест на той же
         tooltipTests.forEach((test) => {
-            it(`${test.expectedTooltipText}`, () => {
+            it(`${test.expectedTooltipText}`, { tags: ['UI', 'regression'] }, () => {
                 mainPage.openOption('Tool Tips')
                 cy.url().should('match', /tool-tips/)
                 tooltipPage.hoverAndVerifyTooltip(test.hoverElement, test.expectedTooltipText)
@@ -142,7 +142,7 @@ context('Actions with widgets', () => {
         })
     })
 
-    it('Menu', () => {
+    it('Menu', { tags: ['UI', 'regression'] }, () => {
         mainPage.openOption('Menu')
         cy.url().should('match', /menu/)
         cy.get(widgetsPagesLocators.listsInMenu).each(item => {
@@ -155,26 +155,26 @@ context('Actions with widgets', () => {
             mainPage.openOption('Select Menu')
             cy.url().should('match', /select-menu/)
         })
-        it('Select value', () => {
+        it('Select value', { tags: ['UI', 'regression'] }, () => {
             selectPage.clickOn(widgetsPagesLocators.dropDownOptionsWithGroup)
             selectPage.selectRandomOptionFromDropDown(widgetsPagesLocators.dropDownMenu, widgetsPagesLocators.option)
         })
 
-        it('Select one', () => {
+        it('Select one', { tags: ['UI', 'regression'] }, () => {
             selectPage.clickOn(widgetsPagesLocators.dropDownOptionsOne)
             selectPage.selectRandomOptionFromDropDown(widgetsPagesLocators.dropDownMenu, widgetsPagesLocators.option)
         })
 
-        it('Drop down select', () => {
+        it('Drop down select', { tags: ['UI', 'regression'] }, () => {
             selectPage.selectorValueChoose(widgetsPagesLocators.selectOldStyle)
         })
 
-        it('Drop down multi-select', () => {
+        it('Drop down multi-select', { tags: ['UI', 'regression'] }, () => {
             cy.contains('Multiselect').parent().siblings('div').realClick()
             selectPage.multiselect(3, widgetsPagesLocators.dropDownMenu, widgetsPagesLocators.option)
         })
 
-        it('List multi-select', () => {
+        it('List multi-select', { tags: ['UI', 'regression'] }, () => {
             //выполним селект двух элементов из списка                      
             cy.get('#cars option').then(options => {
                 //@ts-ignore
@@ -189,5 +189,4 @@ context('Actions with widgets', () => {
               })              
         })
     })
-
 })

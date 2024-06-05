@@ -12,5 +12,8 @@ There is a presentation of my skills regarding some issues related to JS\TS and 
 - e2e and UI tests
 
 ## To run code
-- scripts to run in gitlab workflow:
--- <добавить>
+- to run in github:
+-- open Actions-> mochaReportAndSplit-> Run workflow-> click green btn;
+- scripts to local run:
+-- npx cypress run --browser chrome   //(all tests);
+-- npx cypress run --browser chrome   //(all tests);

@@ -33,7 +33,7 @@ context('Elements options tests', () => {
         cy.log(`Test ${Cypress.currentTest.title} completed`)
     })
 
-    it('Text box', () => { 
+    it('Text box', { tags: ['UI', 'regression'] }, () => { 
         //Заполняем строки рандомными данными и проверяем их отображение в текстовом блоке
         const name = fakeFullName();
         const email = fakeEmail('test');
@@ -52,7 +52,7 @@ context('Elements options tests', () => {
         textBoxPage.assertField(elementsLocators.resultPermAddressField, permAddress)
     })
 
-    it('Buttons', () => {
+    it('Buttons', { tags: ['UI', 'regression'] }, () => {
         let messages = ['You have done a double click', 'You have done a right click', 'You have done a dynamic click'];
         mainPage.openOption('Buttons');
         cy.url().should('match', /buttons/)
@@ -69,7 +69,7 @@ context('Elements options tests', () => {
             mainPage.openOption('Broken Links - Images');
             cy.url().should('match', /broken/)
         })
-        it('Find broken images on page', () => {//должен упасть это ОК
+        it('Find broken images on page', { tags: ['UI', 'regression'] }, () => {//должен упасть это ОК
             const brokenImages = []
             cy.get('img').each(($el, k) => {
                 //у сломанных картинок нет ширины в natural
@@ -90,7 +90,7 @@ context('Elements options tests', () => {
             })
         })
 
-        it('Ckeck links on page', () => {
+        it('Ckeck links on page', { tags: ['UI', 'regression'] }, () => {
             cy.get('a').each(link => {
                 if (link.prop('href'))
                     cy.request({
@@ -102,7 +102,7 @@ context('Elements options tests', () => {
         })
     })
 
-    it('Check box', () => { //flacky
+    it('Check box', { tags: ['UI', 'regression'] }, () => { //flacky
         /*
             * для множественного проставления чек бокса и проверки нужно сделать итератор и проверку на check
             * затем занести текст каждого выбранного чек бокса в массив и проверять через сравнение массивов - все в методе @selectRandomCheckBoxes(iter)
@@ -114,7 +114,7 @@ context('Elements options tests', () => {
         cy.findByTitle('Collapse all').click({ force: true })
     })
 
-    it('Dynamic props', () => {
+    it('Dynamic props', { tags: ['UI', 'regression'] }, () => {
         let colorAfter = 'rgb(220, 53, 69)'
         let colorBefore = 'rgb(255, 255, 255)'
         mainPage.openOption('Dynamic Properties');
@@ -129,7 +129,7 @@ context('Elements options tests', () => {
             mainPage.openOption('Links');
             cy.url().should('match', /links/)
         })
-        it('Home link click', () => {
+        it('Home link click', { tags: ['UI', 'regression'] }, () => {
             //в cypress нет работы с табами, поэтому удаляем target и просто смотрим редирект
             // но можно и без удаления target
             linksPage.clickOnHomeLink()
@@ -138,7 +138,7 @@ context('Elements options tests', () => {
             cy.url().should('match', /links/)
         })
 
-        it('Home dynamic link click', () => {
+        it('Home dynamic link click', { tags: ['UI', 'regression'] }, () => {
             //ищем по вхождению строки и кол-ву символов через regexp, т.е. НЕ Home
             linksPage.clickOnDynamicHomeLink()
             cy.url().should('eq', Cypress.config().baseUrl)
@@ -146,50 +146,50 @@ context('Elements options tests', () => {
             cy.url().should('match', /links/)
         })
         //здесь и далее проверка кодов через Intercept
-        it('api call 201', () => {
+        it('api call 201', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /created/).as('createdResponse')
             linksPage.clickOnRequestBtn(elementsLocators.createdRequest)
             linksPage.checkResponse('createdResponse', 201)
         })
 
-        it('api call 204', () => {
+        it('api call 204', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /no-content/).as('noContentResponse')
             linksPage.clickOnRequestBtn(elementsLocators.noContentRequest)
             linksPage.checkResponse('noContentResponse', 204)
         })
 
-        it('api call 301', () => {
+        it('api call 301', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /moved/).as('movedResponse')
             linksPage.clickOnRequestBtn(elementsLocators.movedRequest)
             linksPage.checkResponse('movedResponse', 301)
         })
 
-        it('api call 400', () => {
+        it('api call 400', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /bad-request/).as('badResponse')
             linksPage.clickOnRequestBtn(elementsLocators.badRequest)
             linksPage.checkResponse('badResponse', 400)
         })
 
-        it('api call 401', () => {
+        it('api call 401', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /unauthorized/).as('unauthResponse')
             linksPage.clickOnRequestBtn(elementsLocators.unauthorizedRequest)
             linksPage.checkResponse('unauthResponse', 401)
         })
 
-        it('api call 403', () => {
+        it('api call 403', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /forbidden/).as('deniedResponse')
             linksPage.clickOnRequestBtn(elementsLocators.forbiddenRequest)
             linksPage.checkResponse('deniedResponse', 403)
         })
 
-        it('api call 404', () => {
+        it('api call 404', { tags: ['UI', 'regression'] }, () => {
             cy.intercept('GET', /invalid-url/).as('notFoundResponse')
             linksPage.clickOnRequestBtn(elementsLocators.invalidUrlRequest)
             linksPage.checkResponse('notFoundResponse', 404)
         })
     })
 
-    it('Radio buttons', () => { 
+    it('Radio buttons', { tags: ['UI', 'regression'] }, () => { 
         mainPage.openOption('Radio Button');
         cy.url().should('match', /radio-button/)
         radioButtonPage.tryClickOnNo()
@@ -216,7 +216,7 @@ context('Elements options tests', () => {
             webTable.createNewRow(params.firstName, params.lastName, params.age, params.email, params.salary, params.department)
         })
 
-        it(`Create new row with ${params.firstName}, ${params.lastName}, ${params.age}, ${params.email}, ${params.department}, ${params.salary}`, () => {
+        it(`Create new row with ${params.firstName}, ${params.lastName}, ${params.age}, ${params.email}, ${params.department}, ${params.salary}`, { tags: ['UI', 'regression'] }, () => {
             //проверка, что grid cell не пустой в следующей строке
             webTable.clickOnAddBtn()
             cy.findByRole('dialog').should('exist')
@@ -231,7 +231,7 @@ context('Elements options tests', () => {
             webTable.clickDeleteRowBtn()
         })
 
-        it('Edit row', () => {
+        it('Edit row', { tags: ['UI', 'regression'] }, () => {
             let newAge = fakeNumber(18, 90)
             let newFirstName = fakeFirstName()
             let newSalary = fakeNumber(100, 90000)
@@ -241,7 +241,7 @@ context('Elements options tests', () => {
             webTable.checkEditedFieldShow(3, 4, newSalary)
         })
 
-        it('Delete row', () => { //считаем кол-во строк в таблице до удаления и сарвниваем с кол-вом после
+        it('Delete row', { tags: ['UI', 'regression'] }, () => { //считаем кол-во строк в таблице до удаления и сарвниваем с кол-вом после
             cy.get(elementsLocators.filledTableRows).then(($value) => {
                 length = $value.length
                 webTable.clickDeleteRowBtn()
@@ -250,7 +250,7 @@ context('Elements options tests', () => {
         })
 
         searchStrings.forEach((search) => {
-            it(`Search row with attr ${search}`, () => {
+            it(`Search row with attr ${search}`, { tags: ['UI', 'regression'] }, () => {
                 webTable.searchRow(search)
                 //сравниваем кол-во пустых строк с общим кол-вом строк и если они около равны, то ищем NoRowsFound - тест окончен
                 //это нужно чтоб при изменении отображения элементов в таблице тест не падал
@@ -267,14 +267,14 @@ context('Elements options tests', () => {
         })
     })
 
-    it('Upload', () => {
+    it('Upload', { tags: ['UI', 'regression'] }, () => {
         mainPage.openOption('Upload and Download');
         cy.url().should('match', /upload-download/)
         downloadAndUploadPage.uploadFile()
         cy.get('[id="uploadedFilePath"]').should('be.visible').and('have.text', 'C:\\fakepath\\text2.txt')
     })
 
-    it('Download', () => { //нужно явно указать путь для сохранения либо в chrome options либо в cypress.config.ts
+    it('Download', { tags: ['UI', 'regression'] }, () => { //нужно явно указать путь для сохранения либо в chrome options либо в cypress.config.ts
         mainPage.openOption('Upload and Download');
         cy.url().should('match', /upload-download/)
         downloadAndUploadPage.clickOnDownLoad()

@@ -15,7 +15,7 @@ context('Main page openen and click on cards', () => {
         blockRequests();
         cy.visit('', { failOnStatusCode: false })
     })
-    it('Open Elements page', () => {
+    it('Open Elements page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Text Box", "Check Box", "Radio Button", "Web Tables", "Buttons", "Links", "Broken Links - Images", "Upload and Download", "Dynamic Properties"]
         mainPage.clickOn(mainPageLocators.elements)
         cy.url().should('match', /elements/)
@@ -25,7 +25,7 @@ context('Main page openen and click on cards', () => {
                 .should('contain.text', item)
         })
     })
-    it('Open Forms page', () => {
+    it('Open Forms page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Practice Form"]
         mainPage.clickOn(mainPageLocators.forms)
         cy.url().should('match', /forms/)
@@ -34,7 +34,7 @@ context('Main page openen and click on cards', () => {
                 .should('contain.text', item)
         })
     })
-    it('Open Alerts, Frame & Windows page', () => {
+    it('Open Alerts, Frame & Windows page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Browser Windows", "Alerts", "Frames", "Nested Frames", "Modal Dialogs"]
         mainPage.clickOn(mainPageLocators.alerts)
         cy.url().should('match', /alertsWindows/)
@@ -43,7 +43,7 @@ context('Main page openen and click on cards', () => {
                 .should('contain.text', item)
         })
     })
-    it('Open Widgets page', () => {
+    it('Open Widgets page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Accordian", "Auto Complete", "Date Picker", "Slider", "Progress Bar", "Tabs", "Tool Tips", "Menu", "Select Menu"]
         mainPage.clickOn(mainPageLocators.widgets)
         cy.url().should('match', /widgets/)
@@ -52,7 +52,7 @@ context('Main page openen and click on cards', () => {
                 .should('contain.text', item)
         })
     })
-    it('Open Interactions page', () => {
+    it('Open Interactions page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Sortable", "Selectable", "Resizable", "Droppable", "Dragabble"]
         mainPage.clickOn(mainPageLocators.interactions)
         cy.url().should('match', /interaction/)
@@ -61,7 +61,7 @@ context('Main page openen and click on cards', () => {
                 .should('contain.text', item)
         })
     })
-    it('Open Book Store Application page', () => {
+    it('Open Book Store Application page', { tags: ['UI', 'smoke'] }, () => {
         const columnsArray = ["Login", "Book Store", "Profile", "Book Store API"]
         mainPage.clickOn(mainPageLocators.bookStore)
         cy.url().should('match', /books/)

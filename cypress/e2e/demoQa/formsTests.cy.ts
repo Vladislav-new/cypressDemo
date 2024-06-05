@@ -27,7 +27,7 @@ afterEach(() => {
 
 data.forEach((userData) => {
 
-    it(`Testing form with data set: ${userData.Column1}`, () => {
+    it(`Testing form with data set: ${userData.Column1}`, { tags: ['UI', 'regression'] }, () => {
         cy.wrap(userData).then((data) => {
             let isEmpty = true
             // Проверяем все ключи объекта     

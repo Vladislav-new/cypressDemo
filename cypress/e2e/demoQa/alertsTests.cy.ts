@@ -26,7 +26,7 @@ context('Actions with alerts and windows - tests', () => {
             cy.url().should('match', /browser-windows/)
         })
 
-        it('New window stubbing', () => {
+        it('New window stubbing', { tags: ['UI', 'regression'] }, () => {
             cy.window().then((win) => {
                 cy.stub(win, 'open', url => {
                     win.location.href = 'https://demoqa.com/sample'
@@ -37,7 +37,7 @@ context('Actions with alerts and windows - tests', () => {
             cy.get(alertsPageLocators.newWindowOpenedLocator).should('have.text', text)
         })
 
-        it('New Tab stub', () => {
+        it('New Tab stub', { tags: ['UI', 'regression'] }, () => {
             cy.window().then((win) => {
                 cy.stub(win, 'open').as('open')
             })
@@ -45,7 +45,7 @@ context('Actions with alerts and windows - tests', () => {
             cy.get('@open').should('have.been.calledOnceWithExactly', '/sample')
         })
 
-        it('New message window', () => {
+        it('New message window', { tags: ['UI', 'regression'] }, () => {
             //тут следим за событием открытия окна, чтоб потом переиспользовать, примерно как intercept
             cy.visit('/browser-windows').then((win) => {
                 cy.spy(win, 'open').as('open')
@@ -66,21 +66,21 @@ context('Actions with alerts and windows - tests', () => {
             cy.url().should('match', /alerts/)
         })
 
-        it('Click Button to see alert', () => {
+        it('Click Button to see alert', { tags: ['UI', 'regression'] }, () => {
             const text = 'You clicked a button';
             alertsPage.clickOnBtn(alertsPageLocators.alertBtn)
             cy.on('window:alert', cy.stub().as('simpleAlert'))
             cy.get('@simpleAlert').should('have.been.calledOnceWith', text)
         })
 
-        it('On button click, alert will appear after 5 seconds', () => {
+        it('On button click, alert will appear after 5 seconds', { tags: ['UI', 'regression'] }, () => {
             const text = 'This alert appeared after 5 seconds';
             alertsPage.clickOnBtn(alertsPageLocators.alertTimerBtn)
             cy.on('window:alert', cy.stub().as('timeAlert'))
             cy.get('@timeAlert', { timeout: 5500 }).should('have.been.calledOnceWith', text)
         })
 
-        it('On button click, confirm box will appear - Cancel', () => {
+        it('On button click, confirm box will appear - Cancel', { tags: ['UI', 'regression'] }, () => {
             const text = 'Do you confirm action?';
             const cancelText = 'You selected Cancel';
             const okText = 'You selected Ok';
@@ -92,7 +92,7 @@ context('Actions with alerts and windows - tests', () => {
             cy.get(alertsPageLocators.confirmResult).should('be.visible').and('have.text', cancelText)
         })
 
-        it('On button click, confirm box will appear - Ok', () => {
+        it('On button click, confirm box will appear - Ok', { tags: ['UI', 'regression'] }, () => {
             const text = 'Do you confirm action?';
             const okText = 'You selected Ok';
             alertsPage.clickOnBtn(alertsPageLocators.confirmAlertBtn)
@@ -101,7 +101,7 @@ context('Actions with alerts and windows - tests', () => {
             cy.get(alertsPageLocators.confirmResult).should('be.visible').and('have.text', okText)
         })
 
-        it('On button click, prompt box will appear', () => {
+        it('On button click, prompt box will appear', { tags: ['UI', 'regression'] }, () => {
             const randomWords = fakeObjectName()
             cy.window().then(win => {
                 cy.stub(win, 'prompt').returns(randomWords)
@@ -111,7 +111,7 @@ context('Actions with alerts and windows - tests', () => {
         })
     })
 
-    it('Check iframe text', () => {
+    it('Check iframe text', { tags: ['UI', 'regression'] }, () => {
         const text = 'This is a sample page'
         mainPage.openOption('Frames')
         cy.url().should('match', /frames/)
@@ -123,7 +123,7 @@ context('Actions with alerts and windows - tests', () => {
         })
     })
 
-    it('Check Nested frames data', () => {
+    it('Check Nested frames data', { tags: ['UI', 'regression'] }, () => {
         const parentFrameText = 'Parent frame'
         const childIFrameText = 'Child Iframe'
         mainPage.openOption('Nested Frames')
@@ -135,7 +135,7 @@ context('Actions with alerts and windows - tests', () => {
         })
     })
 
-    it('Show modal', () => {
+    it('Show modal', { tags: ['UI', 'regression'] }, () => {
         const smallModalText = 'This is a small modal. It has very less content'
         const largeModalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         mainPage.openOption('Modal Dialogs')

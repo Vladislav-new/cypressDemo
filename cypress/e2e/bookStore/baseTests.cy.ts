@@ -30,14 +30,14 @@ context('New user', () => {
         pass: password
     }
 
-    it('registration failed - empty fields', () => {
+    it('registration failed - empty fields', { tags: ['UI', 'regression'] }, () => {
         cy.get(bookStorePageLocators.newUserBtn).should('be.visible').click()
         cy.url().should('match', /register/)
         cy.get(bookStorePageLocators.registryBtn).should('be.visible').realClick()
         loginPage.checkRedBordersOfEmptyFieldsAtRegistry()
     })
     wrongPassList.forEach((wrongPass) => { //все упадут, recaptcha с тестовым ключом google не сработает
-        it(`registration failed - password rules does not match`, () => {
+        it(`registration failed - password rules does not match`, { tags: ['UI', 'regression'] }, () => {
             cy.intercept('POST', '/Account/v1/User').as('registration')
             const userOptions = {
                 firstName: fakeFirstName(),
@@ -52,7 +52,7 @@ context('New user', () => {
         })
     })
     
-    it('registration failed - recapcha does not checked', () => {
+    it('registration failed - recapcha does not checked', { tags: ['UI', 'regression'] }, () => {
         const text:string = 'Please verify reCaptcha to register!'
         cy.intercept('POST', '/Account/v1/User').as('registration')        
         cy.get(bookStorePageLocators.newUserBtn).should('be.visible').click()
@@ -61,7 +61,7 @@ context('New user', () => {
         cy.get(bookStorePageLocators.outputBox).should('be.visible').and('have.text', text)
     })
 
-    it('registration passed', () => { //recaptcha с тестовым ключом google не сработает        
+    it('registration passed', { tags: ['UI', 'smoke'] }, () => { //recaptcha с тестовым ключом google не сработает        
         cy.get(bookStorePageLocators.newUserBtn).should('be.visible').click()
         cy.intercept('POST', '/Account/v1/User').as('registration') 
             cy.url().should('match', /register/)
@@ -74,13 +74,13 @@ context('Auth user tests', () => {
     before(() => {
         bookStoreAPI.prepareUserWithBooks(userName, password, bookList)
     })
-    it('login test with empty fields', () => {
+    it('login test with empty fields', { tags: ['UI', 'smoke'] }, () => {
         cy.get(bookStorePageLocators.userNameInput).should('be.visible').type('{enter}', {force:true})
         cy.get(bookStorePageLocators.passwordInput).should('be.visible').type('{enter}', {force:true})
         cy.get(bookStorePageLocators.loginBtn).click()
         loginPage.checkRedBordersOfEmptyFieldsAtLogin()
     })
-    it('login test with wrong user name', () => {
+    it('login test with wrong user name', { tags: ['UI', 'smoke'] }, () => {
         const text:string = 'Invalid username or password!'
         cy.get(bookStorePageLocators.userNameInput).should('be.visible').type('userName', {force:true})
         cy.get(bookStorePageLocators.passwordInput).should('be.visible').type(password, {force:true})
@@ -88,14 +88,14 @@ context('Auth user tests', () => {
         cy.get(bookStorePageLocators.outputBox).should('be.visible').and('have.text', text)
     })
 
-    it('login test with wrong password', () => {
+    it('login test with wrong password', { tags: ['UI', 'smoke'] }, () => {
         const text:string = 'Invalid username or password!'
         cy.get(bookStorePageLocators.userNameInput).should('be.visible').type(userName, {force:true})
         cy.get(bookStorePageLocators.passwordInput).should('be.visible').type('password', {force:true})
         cy.get(bookStorePageLocators.loginBtn).click()
         cy.get(bookStorePageLocators.outputBox).should('be.visible').and('have.text', text)
     })
-    it('Happy login', () => {
+    it('Happy login', { tags: ['UI', 'smoke'] }, () => {
         loginPage.openOption('Login')
         loginPage.login(userName, password)
     })
