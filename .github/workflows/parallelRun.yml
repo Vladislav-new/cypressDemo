@@ -7,30 +7,18 @@ on:
   workflow_dispatch:     
 
 jobs:
+  jobs:
   test-split:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     # use two containers to run the tests
     strategy:
       fail-fast: false
       matrix:
         containers: [1, 2]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: debug
-        run: |
-          printenv
-          whereis npm
-
-      - name: Run Tests
-        run: npm run test
-
-      - name: Run split Cypress tests 🧪
-        # https://github.com/cypress-io/github-action
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+      - name: Run split Cypress tests
         uses: cypress-io/github-action@v6
         with:
           # we don't need Cypress own runner summary
