@@ -1,4 +1,4 @@
-name: parallelRegressStage
+name: parallelRegress
 on:
   schedule:
     - cron: 0 1 * * 1-5
@@ -44,3 +44,13 @@ jobs:
         env:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
+      
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-results
+          path: |
+            cypress/screenshots
+            cypress/videos
+            cypress/results
+          if-no-files-found: ignore
