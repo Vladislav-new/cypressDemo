@@ -5,7 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run",
-    "debug": "DEBUG=cypress-split SPLIT=6 SPLIT_INDEX=5 npx cypress run"
+    "start": "npm start --prefix todomvc",
+    "cypress": "cypress open",
+    "dev": "start-test 3000 cypress",
+    "print-tests": "find-cypress-specs --names --tags",
+    "lint": "tsc --noEmit --pretty",
+    "ci": "start-test 3000 cy:run",
+    "cy:run": "cypress run",
+    "postinstall": "npm install --prefix todomvc",
+    "report:merge": "mochawesome-merge cypress/results/*.json -o cypress/report.json",
+    "report:generate": "marge cypress/report.json --charts true",
+    "one:report": "cypress run --spec cypress/e2e/viewports.cy.ts"
   },
   "repository": {
     "type": "git",

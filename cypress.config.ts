@@ -1,4 +1,5 @@
 const { defineConfig } = require('cypress');
+// @ts-ignore
 const cypressSplit = require('cypress-split')
 
 let baseUrl = "https://demoqa.com/";
@@ -6,11 +7,14 @@ let baseUrl = "https://demoqa.com/";
 module.exports = defineConfig({  
   reporter: 'mochawesome',
   reporterOptions: {
+    useInlineDiffs: true,
+    embeddedScreenshots: true,
     reportDir: 'cypress/results',
     reportFilename: '[name].html',
     overwrite: true,
     html: true,
-    json: false,
+    // need JSON reports to merge them later
+    json: true,
   },
   retries: {
     runMode: 1,
