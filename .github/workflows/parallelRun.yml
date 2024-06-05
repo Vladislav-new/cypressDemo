@@ -4,18 +4,13 @@ on:
     - cron: 0 1 * * 1-5
   workflow_dispatch: null
 jobs:
-  # example splitting all tests across GitHub machines
   prepare:
     runs-on: ubuntu-latest
-    # explicitly set the output of this job
-    # so that other jobs can use it
     outputs:
       matrix: ${{ steps.prepare.outputs.matrix }}
     steps:
-      # generate the list using a bash script
       - name: Create matrix ⊹
         id: prepare
-        # for reusable workflow, must use the full action reference
         uses: bahmutov/gh-build-matrix@main
         with:
           n: 3 # number of containers to output
@@ -45,9 +40,12 @@ jobs:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
   
+  upload-artifact:
+  if: always()
+  runs-on: ubuntu-latest
+    steps:
       - name: Upload reports
-        uses: actions/upload-artifact@v4
-        if: always()
+        uses: actions/upload-artifact@v4        
         with:
           name: cypress-results
           path: |
@@ -55,6 +53,3 @@ jobs:
             cypress/videos
             cypress/results
           if-no-files-found: ignore
-        env:
-          SPLIT: ${{ strategy.job-total }}
-          SPLIT_INDEX: ${{ strategy.job-index }}
