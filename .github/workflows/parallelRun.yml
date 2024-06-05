@@ -4,17 +4,6 @@ on:
     - cron: 0 1 * * 1-5
   workflow_dispatch: null
 jobs:
-  # example running all tests on a single machine
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v4
-
-      - name: Run Cypress tests 🧪
-        # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v5
-
   # example splitting all tests across GitHub machines
   prepare:
     runs-on: ubuntu-latest
