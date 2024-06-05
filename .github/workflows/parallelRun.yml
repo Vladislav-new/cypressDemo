@@ -44,9 +44,14 @@ jobs:
         env:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
-      
+
+  upload-artifacts:
+    needs: test-split
+    runs-on: ubuntu-latest    
+    steps:      
       - name: Upload reports
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: cypress-results
           path: |
