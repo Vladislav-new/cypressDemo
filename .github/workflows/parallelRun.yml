@@ -15,8 +15,19 @@ jobs:
       matrix:
         containers: [1, 2]
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: debug
+        run: |
+          printenv
+          whereis npm
+
+      - name: Run Tests
+        run: npm run test
 
       - name: Run split Cypress tests 🧪
         # https://github.com/cypress-io/github-action
