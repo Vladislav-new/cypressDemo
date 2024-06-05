@@ -1,0 +1,14 @@
+name: mochaReportAndSplit
+on:
+  schedule:
+    - cron: 0 1 * * 1-5
+  workflow_dispatch: null
+jobs:
+  merge-reports:
+    uses: bahmutov/cypress-workflows/.github/workflows/split.yml@v2
+    with:
+      nE2E: 3
+      start: npx cypress run --browser chrome
+      # merge all test reports into one
+      # https://github.com/bahmutov/cypress-workflows
+      marge: true

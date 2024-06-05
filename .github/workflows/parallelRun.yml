@@ -41,6 +41,7 @@ jobs:
           SPLIT_INDEX: ${{ strategy.job-index }}
   
   upload-artifact:
+    needs: test-split
     if: always()
     runs-on: ubuntu-latest
     steps:
