@@ -4,7 +4,18 @@
   "description": "There is a presentation of my skills regarding some issues related to JS\\TS and Cypress framework\r - matrix strategy regarding platform and browser with split test-scopes\r - launch CI file in GHActions in another one\r - allure reporting with screenshots\r - different log levels\r - OOP\r - Page object with data factory and bulder\r - custom commands\r - API\r - tags\r - tests",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "start": "npm start --prefix todomvc",
+    "cypress": "cypress open",
+    "dev": "start-test 3000 cypress",
+    "print-tests": "find-cypress-specs --names --tags",
+    "lint": "tsc --noEmit --pretty",
+    "ci": "start-test 3000 cy:run",
+    "cy:run": "cypress run",
+    "postinstall": "npm install --prefix todomvc",
+    "report:merge": "mochawesome-merge cypress/results/*.json -o cypress/report.json",
+    "report:generate": "marge cypress/report.json --charts true",
+    "one:report": "cypress run --spec cypress/e2e/viewports.cy.ts"
   },
   "repository": {
     "type": "git",
@@ -19,14 +30,18 @@
   "devDependencies": {
     "@4tw/cypress-drag-drop": "^2.2.5",
     "@faker-js/faker": "^8.4.1",
-    "@shelex/cypress-allure-plugin": "^2.40.2",
     "@testing-library/cypress": "^10.0.1",
+    "ajv": "^8.16.0",
     "cypress": "^13.9.0",
     "cypress-real-events": "^1.12.0",
+    "cypress-split": "^1.23.7",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
     "faker-js": "^1.0.0",
     "jsonpath": "^1.1.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
     "typescript": "^5.4.5"
   }
 }

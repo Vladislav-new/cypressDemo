@@ -1,34 +1,36 @@
 const { defineConfig } = require('cypress');
-const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+// @ts-ignore
+const cypressSplit = require('cypress-split')
 
-let baseUrl="https://demoqa.com/";
+let baseUrl = "https://demoqa.com/";
 
-module.exports = defineConfig({
-  // "reporter": "@shelex/cypress-allure-plugin/writer",
-  // "allure": {
-  //   "resultsDir": "allure-results",
-  //   "disableWebdriverStepsReporting": true,
-  //   "disableWebdriverScreenshotsReporting": true,
-  //   "allureTestOps": {
-  //     "enabled": false,
-  //    // "url": "https://allure.contrust.team/",
-  //    // "projectId": process.env.PROJECT_ID,
-  //    // "token": "glpat-nNUcenB9FfRyKepsHxw1"
-  //   }
-  // },
+module.exports = defineConfig({  
+  reporter: 'mochawesome',
+  reporterOptions: {
+    useInlineDiffs: true,
+    embeddedScreenshots: true,
+    reportDir: 'cypress/results',
+    reportFilename: '[name].html',
+    overwrite: true,
+    html: true,
+    // need JSON reports to merge them later
+    json: true,
+  },
   retries: {
     runMode: 1,
     openMode: 0,
   },
-  env: {    
-    hideXHR: true,
+  env: {
+    hideXHR: false,
+    RECAPTCHA_SITE_KEY: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
   },
   viewportWidth: 1920,
   viewportHeight: 1080,
+  chromeWebSecurity: false,
   e2e: {
     downloadsFolder: 'C:/Users/vladi/Downloads',
     defaultCommandTimeout: 15000,
-    baseUrl,
+    baseUrl,    
     chromeWebSecurity: false,
     trashAssetsBeforeRuns: true,
     experimentalInteractiveRunEvents: true,
@@ -36,7 +38,7 @@ module.exports = defineConfig({
     numTestsKeptInMemory: 10,
     video: false,
     setupNodeEvents(on, config) {
-      //allureWriter(on, config);
+      cypressSplit(on, config)
       return config;
     },
   },

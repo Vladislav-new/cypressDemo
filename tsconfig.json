@@ -12,11 +12,10 @@
             "node",
             "@testing-library/cypress",
             "cypress-real-events",
-            "@shelex/cypress-allure-plugin",
             "@4tw/cypress-drag-drop"
         ]
     },
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "include": [
-        "../node_modules/@shelex/cypress-allure-plugin/reporter",
         "**/*.ts"  ]
 }

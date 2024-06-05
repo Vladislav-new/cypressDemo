@@ -174,7 +174,7 @@ context('Actions with widgets', () => {
             selectPage.multiselect(3, widgetsPagesLocators.dropDownMenu, widgetsPagesLocators.option)
         })
 
-        it('List multi-select', () => { //дописать
+        it('List multi-select', () => {
             //выполним селект двух элементов из списка                      
             cy.get('#cars option').then(options => {
                 //@ts-ignore

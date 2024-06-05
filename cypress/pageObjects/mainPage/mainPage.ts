@@ -10,4 +10,8 @@ export class MainPage {
             cy.log(`Click on "${optionName}"`)
         })
     }
+
+    checkAnswerStatusCode(interceptor:string, statusCode:number) {
+        cy.wait(interceptor).its('response.statusCode').should('eq', statusCode)
+    }
 }
