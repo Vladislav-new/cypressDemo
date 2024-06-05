@@ -12,7 +12,7 @@ There is a presentation of my skills regarding some issues related to JS\TS and 
 
 ## To run code
 - to run in github:
--- open Actions-> mochaReportAndSplit-> Run workflow-> click green btn;
+-- open Actions-> mochaReportAndSplit-> Run workflow-> input tags without comma`s and click green btn;
 - scripts to local run:
 -- npx cypress run --browser chrome   //(all tests);
 -- npx cypress run --browser chrome --env grepTags="e2e"   //(test with tags- possibletags are: e2e, regression, UI, API, smoke); 
