@@ -55,3 +55,6 @@ jobs:
             cypress/videos
             cypress/results
           if-no-files-found: ignore
+        env:
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }}

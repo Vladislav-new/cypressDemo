@@ -10,7 +10,7 @@ module.exports = defineConfig({
     useInlineDiffs: true,
     embeddedScreenshots: true,
     reportDir: 'cypress/results',
-    reportFilename: '[name].html',
+    reportFilename: '[name]-report.html',
     overwrite: true,
     html: true,
     // need JSON reports to merge them later
