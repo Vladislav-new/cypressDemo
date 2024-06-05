@@ -49,7 +49,9 @@ jobs:
 
       - name: Run split Cypress tests 🧪
         uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run --browser chrome
+          publish-summary: false
         env:
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
-          DEBUG: cypress-split
