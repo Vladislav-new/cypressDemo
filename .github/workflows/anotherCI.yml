@@ -5,16 +5,10 @@ on:
   workflow_dispatch:
     inputs:
       tags:
-        description: 'Test tags'
+        description: 'Test tags (UI, e2e, regression, smoke, API)'
         required: false
         default: 'regression'
-        type: choice
-        options:
-          - UI
-          - e2e
-          - regression
-          - API
-          - smoke
+        type: string
 jobs:
   merge-reports:
     uses: bahmutov/cypress-workflows/.github/workflows/split.yml@v2
