@@ -1,27 +1,24 @@
-# Define the manual-test-run workflow
 name: parallelRegressStage
 on:
-  schedule:    
-    - cron: '0 1 * * 1-5'
-    # Запускает в минуты :00, часы 18Z+00, каждые day, каждые month, в Пн, Вт, Ср, Чт, Пт.
-  workflow_dispatch:     
-
+  schedule:
+    - cron: 0 1 * * 1-5
+  workflow_dispatch: null
 jobs:
-  jobs:
+  jobs: null
   test-split:
     runs-on: ubuntu-22.04
-    # use two containers to run the tests
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2]
+        containers:
+          - 1
+          - 2
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
       - name: Run split Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          # we don't need Cypress own runner summary
           publish-summary: false
         env:
           SPLIT: ${{ strategy.job-total }}
