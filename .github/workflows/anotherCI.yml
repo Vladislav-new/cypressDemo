@@ -15,7 +15,7 @@ jobs:
     with:
       nE2E: 3
       # start: npx cypress run --browser chrome
-      command: npx cypress run --browser chrome --env grepTags="${{github.event.inputs.tags}}"
+      command: npx cypress run --browser chrome --env grepTags="${{github.event.inputs.tags || 'regression'}}"
       # merge all test reports into one
       # https://github.com/bahmutov/cypress-workflows
       marge: true
