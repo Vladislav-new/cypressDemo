@@ -1,7 +1,5 @@
 name: mochaReportAndSplit
-on:
-  schedule:
-    - cron: 0 18 * * 1-5
+on:  
   workflow_dispatch:
     inputs:
       tags:
